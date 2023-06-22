@@ -1,2 +1,5 @@
 # Ride-sharing-app
-Gourp Project for Web-tech AIUB
+Group Project for Web-tech AIUB
+Project Manager: Jariatun Islam
+Lead Developer: Mohammad Nur
+
