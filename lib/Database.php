@@ -3,6 +3,10 @@
 
 namespace lib;
 
+use PDO;
+use PDOException;
+use PDOStatement;
+
 class Database {
     private static $pdo;
 
