@@ -1,4 +1,9 @@
 <?php
+
+use lib\Session;
+
+require_once "lib/Session.php";
+require_once "RiderTable.php";
 class Login
 {
     private string $email;
@@ -48,9 +53,17 @@ class Login
         $email = $this->getEmail();
         $password = $this->getPassword();
         if ($email == "" || $password == "") {
+            if (session_status() === PHP_SESSION_NONE) {
+               Session::init();
+            }            
+            Session::set("flash_message", "Email or Password must not be empty");
             return false;
         }
-        
-        echo "hello";
+        $riderTable = new RiderTable();
+        $rider = $riderTable->getRiderByEmailAndPassword($email, $password);
+        return $rider;
+        Session::init();
+        Session::set("rider", $rider);
+        // header("Location: index.php");
     }
 }

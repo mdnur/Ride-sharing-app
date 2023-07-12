@@ -1,3 +1,10 @@
+<?php
+
+include_once "lib/Session.php" ;
+ use lib\Session;
+
+Session::checkLogin();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -8,20 +15,33 @@
 
 <body>
     <?php
+
+
     include_once 'classes/Login.php';
+
     if (isset($_POST['log'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $login = new Login();
         $login->setEmail($email);
         $login->setPassword($password);
-        $login->login();
-        if ($login->login()) {
-            echo "Login Successful";
+        if ($rider = $login->login()) {
+            Session::init();
+            Session::set("rider", $rider);
+            Session::set("login", true);
+            header("Location: index.php");
         }else{
-            echo "Username or Password is incorrect";
+            if (Session::get("flash_message")) {
+                // Display flash message
+                echo $_SESSION['flash_message'];
+            
+                // Clear flash message
+                unset($_SESSION['flash_message']);
+            }
+            // echo "Username or Password is incorrect";
         }
     }
+    
 
     ?>
     <center>
@@ -44,7 +64,10 @@
                 <input type="checkbox" id="check">
                 <span>Remember me</span>
                 <br><br>
-                Forgot <a href="#">Password</a>
+
+                <p>Don't Have a account?</p> <a href="SignUp.php">Sign Up</a>
+                <br><br>
+                 <a href="#">Forgot Password</a>
             </form>
         </div>
     </center>

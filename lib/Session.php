@@ -20,12 +20,12 @@ class Session{
         return $_SESSION[$key] ?? FALSE;
     }
 
-    public static function checkSeesion(): void
+    public static function checkSession(): void
     {
         self::init();
         if(!self::get("login")){
             self:: destory();
-//            header("location:login.php");
+           header("location:login.php");
         }
     }
 
@@ -33,13 +33,14 @@ class Session{
     public static function checkLogin() {
         self::init();
         if(self::get("login")){
-//            header("location:index.php.php");
+           header("location:index.php");
         }
     }
 
     public static function destory(): void
     {
         session_destroy();
+        session_unset();
 //        header("Location:login.php?action=logout");
     }
 

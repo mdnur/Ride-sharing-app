@@ -3,8 +3,8 @@
  * Description of Config
  * @author MD Nur
  */
-const DB_HOST = "127.0.0.1";
-const DB_NAME = "";
-const DB_USER = "";
-const DB_PASS = "";
+const DB_HOST = "localhost";
+const DB_NAME = "TransitWise";
+const DB_USER = "root";
+const DB_PASS = "password";
 const PROJECT_ROOT_PATH = __DIR__;

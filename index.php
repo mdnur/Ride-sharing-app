@@ -1,5 +1,8 @@
 <?php
+include_once "lib/Session.php" ;
+use lib\Session;
 
+Session::checkSession();
 spl_autoload_register(function($class){
     include "Classes/".$class.".php";
 });
@@ -13,6 +16,18 @@ spl_autoload_register(function($class){
     <title>Document</title>
 </head>
 <body>
-    
+
+<!--<form action="" method="get">-->
+<!--    <input type="submit" value="Logout" name="logout">-->
+<!--</form>-->
+
+<?php
+if(isset(($_GET['action']))){
+    if($_GET['action'] == 'logout')
+    Session::destory();
+    header("Location:login.php");
+}
+?>
+<a href="?action=logout">LOGOUT</a>
 </body>
 </html>

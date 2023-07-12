@@ -1,7 +1,7 @@
 <?php
-//require_once '../config/Config.php';
 
 namespace lib;
+require_once 'config/Config.php';
 
 use PDO;
 use PDOException;
