@@ -1,15 +1,15 @@
 <?php
 
-include_once "lib/Session.php" ;
+require_once $_SERVER['DOCUMENT_ROOT']. '/lib/Session.php';
  use lib\Session;
 
-Session::checkLogin();
+Session::checkAdminLogin();
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Login Form</title>
+    <title>Admin Login Form</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -17,23 +17,24 @@ Session::checkLogin();
     <?php
 
 
-    include_once 'classes/Login.php';
+    include_once $_SERVER['DOCUMENT_ROOT']. '/classes/AdminLogin.php';
 
     if (isset($_POST['log'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $login = new Login();
+        $login = new AdminLogin();
         $login->setEmail($email);
         $login->setPassword($password);
         if ($rider = $login->login()) {
             Session::init();
-            Session::set("rider", $rider);
-            Session::set("login", true);
+            Session::set("admin", $rider);
+            Session::set("adminLogin", true);
             header("Location: index.php");
         }else{
             if (Session::get("flash_message")) {
                 // Display flash message
                 echo $_SESSION['flash_message'];
+            
                 // Clear flash message
                 unset($_SESSION['flash_message']);
             }
@@ -44,7 +45,7 @@ Session::checkLogin();
 
     ?>
     <center>
-        <h2>Login Page</h2><br>
+        <h2>Admin Login Page</h2><br>
         <div class="login">
             <form id="login" method="post" action="login.php">
                 <label for="email"><b>Email

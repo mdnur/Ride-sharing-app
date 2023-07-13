@@ -28,11 +28,25 @@ class Session{
            header("location:login.php");
         }
     }
-
+    public static function CheckAdminSession(): void
+    {
+        self::init();
+        if(!self::get("adminLogin")){
+            self:: destory();
+           header("location:login.php");
+        }
+    }
 
     public static function checkLogin() {
         self::init();
         if(self::get("login")){
+           header("location:index.php");
+        }
+    }
+
+    public static function checkAdminLogin() {
+        self::init();
+        if(self::get("adminLogin")){
            header("location:index.php");
         }
     }

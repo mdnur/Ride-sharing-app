@@ -2,7 +2,7 @@
 
 use lib\Session;
 
-require_once "lib/Session.php";
+require_once $_SERVER['DOCUMENT_ROOT']. "/lib/Session.php";
 require_once "RiderTable.php";
 require_once "Validation.php";
 class Login
@@ -62,9 +62,14 @@ class Login
         }
         $riderTable = new RiderTable();
         $rider = $riderTable->getRiderByEmailAndPassword($email, $password);
+        if($rider == null){
+            if (session_status() === PHP_SESSION_NONE) {
+                Session::init();
+             }            
+             Session::set("flash_message", "Email or Password is incorrect");
+             return false;
+        }
         return $rider;
-        Session::init();
-        Session::set("rider", $rider);
         // header("Location: index.php");
     }
     public function signUp($post){

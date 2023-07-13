@@ -1,7 +1,7 @@
 <?php 
 
 use lib\Session;
-require_once "lib/Session.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/lib/Session.php";
 
 class Validation{
     public static function required($value, $field_name){

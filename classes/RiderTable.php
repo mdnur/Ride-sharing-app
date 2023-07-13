@@ -1,6 +1,6 @@
 <?php
-require_once "lib/Database.php";
-require_once "lib/MainTable.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/lib/Database.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/lib/MainTable.php";
 use lib\Database;
 use lib\MainTable;
 

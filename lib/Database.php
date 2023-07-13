@@ -1,7 +1,7 @@
 <?php
 
 namespace lib;
-require_once 'config/Config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/config/Config.php';
 
 use PDO;
 use PDOException;
