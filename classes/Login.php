@@ -4,6 +4,7 @@ use lib\Session;
 
 require_once "lib/Session.php";
 require_once "RiderTable.php";
+require_once "Validation.php";
 class Login
 {
     private string $email;
@@ -65,5 +66,35 @@ class Login
         Session::init();
         Session::set("rider", $rider);
         // header("Location: index.php");
+    }
+    public function signUp($post){
+        $this->signUpValidation($post);
+        unset($post['log']);
+        unset($post['confirm_password']);
+        $post['role'] = 'rider';
+        $post['created_at'] = date('d-m-y h:i:s');
+
+        $riderTable = new RiderTable();
+        if(Session::get('flash_message') == null){
+            // echo $riderTable->getRiderByFieldName('email',$post['email']);
+            print_r($post);
+            if($riderTable->insert('rider',$post)){
+                return $this->login();
+            }
+        }
+    }
+
+    public function signUpValidation($post){
+        $post['name'] =Validation::required($post['name'], 'Name');
+        $post['email'] = Validation::required($post['email'], 'email');
+        $post['password'] = Validation::required($post['password'], 'password');
+        $post['username'] = Validation::required($post['username'], 'username');
+        $post['phone'] = Validation::required($post['phone'], 'phone');
+        $post['confirm_password'] = Validation::required($post['confirm_password'], 'confirm_password');
+        Validation::confirm_password($post['password'],$post['confirm_password']);
+        Validation::getRiderByFieldName('email',$post['email']);
+        Validation::getRiderByFieldName('username',$post['username']);
+        Validation::getRiderByFieldName('phone',$post['phone']);
+        return $this;
     }
 }

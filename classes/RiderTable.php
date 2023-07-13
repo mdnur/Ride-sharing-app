@@ -1,9 +1,11 @@
 <?php
 require_once "lib/Database.php";
+require_once "lib/MainTable.php";
 use lib\Database;
+use lib\MainTable;
 
-class RiderTable{
-    private $table = "rider";
+class RiderTable extends MainTable{
+    protected $table = "rider";
 
 
     public function getRiderByEmailAndPassword($email,$password){
@@ -13,5 +15,13 @@ class RiderTable{
         $stmt->bindParam(":password",$password);
         $stmt->execute();
         return $stmt->fetch();//PDO::FETCH_OBJ
+    }
+
+    public function getRiderByFieldName($fieldName,$value){
+        $sql = "SELECT * FROM ".$this->table." WHERE  ".$fieldName."= :" .$fieldName;
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":".$fieldName."",$value);
+        $stmt->execute();
+        return $stmt->rowCount();//PDO::FETCH_OBJ
     }
 }
