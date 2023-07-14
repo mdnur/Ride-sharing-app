@@ -45,8 +45,8 @@ if (isset(($_GET['action']))) {
     <li>
         Vehicle
         <ul>
-            <li><a href="">Add Vehicle</a></li>
-            <li><a href="">Show Vehicle</a></li>
+            <li><a href="add_vehicle.php">Add Vehicle</a></li>
+            <li><a href="show_vehicle.php">Show Vehicle</a></li>
         </ul>
     </li>
 
