@@ -30,6 +30,22 @@ abstract class MainTable
         return $stmt->execute();
     }
 
+    public function update($data, $condition) {
+        $setStatements = [];
+        foreach ($data as $column => $value) {
+            $setStatements[] = $column . " = :" . $column;
+        }
+    
+        $sql = "UPDATE " . $this->table . " SET " . implode(", ", $setStatements) . " WHERE id" . " = :id";
+        $stmt = Database::prepare($sql);
+    
+        foreach ($data as $column => $value) {
+            $stmt->bindParam(":" . $column, $data[$column]);
+        }
+        $stmt->bindParam(":id" , $condition);
+        return $stmt->execute();
+    }
+    
 
 
     public function readByid($id) {
