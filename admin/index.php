@@ -24,8 +24,8 @@ if (isset(($_GET['action']))) {
     <li>
         Location
         <ul>
-            <li><a href="">Add Location</a></li>
-            <li><a href="">Show Location</a></li>
+            <li><a href="add_location.php">Add Location</a></li>
+            <li><a href="show_location.php">Show Location</a></li>
         </ul>
     </li>
     <li>
