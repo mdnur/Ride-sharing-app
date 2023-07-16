@@ -31,8 +31,8 @@ if (isset(($_GET['action']))) {
     <li>
         Sub Location
         <ul>
-            <li><a href="">Add Sub Location</a></li>
-            <li><a href="">Show Sub Location</a></li>
+            <li><a href="add_sub_location.php">Add Sub Location</a></li>
+            <li><a href="show_sub_location.php">Show Sub Location</a></li>
         </ul>
     </li>
     <li>

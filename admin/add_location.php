@@ -2,6 +2,7 @@
 <?php
 if (isset($_POST['log'])) {
     unset($_POST['log']);
+    print_r($_POST);
     $locationData = $_POST;
     print_r($locationData);
     $location = new LocationTable();
