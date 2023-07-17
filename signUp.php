@@ -10,7 +10,7 @@ Session::checkLogin();
 <html>
 
 <head>
-    <title>Login Form</title>
+    <title>Registration Form</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -47,7 +47,7 @@ Session::checkLogin();
 
     ?>
     <center>
-        <h2>Login Page</h2><br>
+        <h2>Registration Page</h2><br>
         <div class="login">
             <form id="login" method="post" action="signUp.php">
                 <label for="name"><b>Name
@@ -84,13 +84,9 @@ Session::checkLogin();
                 <br><br>
                 <input type="submit" name="log" id="log" value="Sign UP">
                 <br><br>
-                <input type="checkbox" id="check">
-                <span>Remember me</span>
-                <br><br>
 
                 <p>Have a account?</p> <a href="login.php">Login here</a>
                 <br><br>
-                <a href="#">Forgot Password</a>
             </form>
         </div>
     </center>

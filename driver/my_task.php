@@ -22,7 +22,7 @@ $admin = new AdminTable();
 
 ?>
 <center>
-    <h2>Show Route</h2><br>
+    <h2>Show Task</h2><br>
 
     <table>
         <tr>
@@ -38,7 +38,7 @@ $admin = new AdminTable();
             <th>Status</th>
             <th>Created by</th>
             <th>created At</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
         </tr>
         <?php foreach ($results as $row) { ?>
             <tr>
@@ -54,7 +54,7 @@ $admin = new AdminTable();
                 <td><?php echo $route->getStatus($row['status']); ?></td>
                 <td><?php echo ($admin->readByid($row['createdbyID']))['name'] ?></td>
                 <td><?php echo $row['created_at']; ?></td>    
-                <td><a href="update_route.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="">Delete</a></td>
+                <!-- <td><a href="update_route.php?id=<?php //echo $row['id']; ?>">Edit</a> | <a href="">Delete</a></td> -->
             </tr>
         <?php } ?>
     </table>

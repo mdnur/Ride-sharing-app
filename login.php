@@ -1,7 +1,8 @@
 <?php
 
-include_once "lib/Session.php" ;
- use lib\Session;
+include_once "lib/Session.php";
+
+use lib\Session;
 
 Session::checkLogin();
 ?>
@@ -18,19 +19,31 @@ Session::checkLogin();
 
 
     include_once 'classes/Login.php';
-
     if (isset($_POST['log'])) {
+        // Function to generate a unique token
+        $remember = $_POST['remember'] ?? null;
+
+        unset($_POST['remember']);
+
+
         $email = $_POST['email'];
         $password = $_POST['password'];
         $login = new Login();
         $login->setEmail($email);
         $login->setPassword($password);
         if ($rider = $login->login()) {
+            if ($remember != null) {
+                $expirationTime = time() + 60 * 60;
+                setcookie('email', $_POST['email'], $expirationTime); //1 hour
+                setcookie('password', $_POST['password'], $expirationTime); //1 hour
+            }
+
+
             Session::init();
             Session::set("rider", $rider);
             Session::set("login", true);
             header("Location: index.php");
-        }else{
+        } else {
             if (Session::get("flash_message")) {
                 // Display flash message
                 echo $_SESSION['flash_message'];
@@ -40,7 +53,7 @@ Session::checkLogin();
             // echo "Username or Password is incorrect";
         }
     }
-    
+
 
     ?>
     <center>
@@ -50,23 +63,23 @@ Session::checkLogin();
                 <label for="email"><b>Email
                     </b>
                 </label>
-                <input type="email" name="email" id="email" placeholder="Username">
+                <input type="email" name="email" id="email" placeholder="Username" value="<?php echo $_COOKIE['email'] ?? '' ?>">
                 <br><br>
 
                 <label for="password"><b>Password
                     </b>
                 </label>
-                <input type="Password" name="password" id="password" placeholder="Password">
+                <input type="Password" name="password" id="password" placeholder="Password" value="<?php echo $_COOKIE['password'] ?? '' ?>">
                 <br><br>
                 <input type="submit" name="log" id="log" value="Log In Here">
                 <br><br>
-                <input type="checkbox" id="check">
-                <span>Remember me</span>
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
                 <br><br>
 
                 <p>Don't Have a account?</p> <a href="SignUp.php">Sign Up</a>
                 <br><br>
-                 <a href="#">Forgot Password</a>
+                <!-- <a href="#">Forgot Password</a> -->
             </form>
         </div>
     </center>

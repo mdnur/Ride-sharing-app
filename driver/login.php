@@ -1,5 +1,5 @@
+<?php
 
-<?php 
 use lib\Session;
 
 ?>
@@ -33,6 +33,9 @@ Session::checkDriverLogin();
         $email = $_POST['email'];
         $password = $_POST['password'];
         unset($_POST['log']);
+        $remember = $_POST['remember'] ?? null;
+
+        unset($_POST['remember']);
 
 
 
@@ -42,6 +45,11 @@ Session::checkDriverLogin();
         $login->setPassword($password);
         // print_r($_POST);
         if ($driver = $login->login()) {
+            if ($remember != null) {
+                $expirationTime = time() + 60 * 60;
+                setcookie('emailD', $_POST['email'], $expirationTime); //1 hour
+                setcookie('passwordD', $_POST['password'], $expirationTime); //1 hour
+            }
             Session::init();
             Session::set("driver", $driver);
             Session::set("driverLogin", true);
@@ -66,15 +74,18 @@ Session::checkDriverLogin();
                 <label for="email"><b>Email
                     </b>
                 </label>
-                <input type="email" name="email" id="email" placeholder="Username">
+                <input type="email" name="email" id="email" placeholder="email" value="<?php echo $_COOKIE['emailD'] ?? '' ?>">
                 <br><br>
 
                 <label for="password"><b>Password
                     </b>
                 </label>
-                <input type="Password" name="password" id="password" placeholder="Password">
+                <input type="Password" name="password" id="password" placeholder="Password" value="<?php echo $_COOKIE['passwordD'] ?? '' ?>">
                 <br><br>
                 <input type="submit" name="log" id="log" value="Log In Here">
+                <br><br>
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
                 <br><br>
             </form>
         </div>

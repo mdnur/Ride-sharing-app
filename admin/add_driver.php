@@ -16,7 +16,8 @@
 
         // print_r($_POST);
         $_POST['created_at'] = date("Y-m-d H:i:s", time());
-  
+        $_POST['role'] = 'driver';
+        $driverData = $_POST;
         $driver = new DriverTable();
     
         if ($driver->insert('driver',$driverData)) {
@@ -31,7 +32,7 @@
     <center>
         <h2>Add Driver</h2><br>
         <div class="login">
-            <form id="login" method="get" action="">
+            <form id="login" method="post" action="">
                 <label for="name"><b>Name
                     </b>
                 </label>
@@ -52,6 +53,13 @@
                 </label>    
                 <input type="text" id="phone" name="phone" pattern="^01[3456789]\d{8}$" placeholder="01XXXXXXXXX" title="Bangladesh phone number: 01XXXXXXXXX" required>
                 <br><br>
+
+                <label for="salary"><b>salary
+                    </b>
+                </label>
+                <input type="number" name="salary" id="salary" placeholder="amount" required>
+                <br><br>
+
 
                 <label for="password"><b>password
                     </b>

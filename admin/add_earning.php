@@ -17,7 +17,7 @@ if (isset($_POST['log'])) {
 
 ?>
 <center>
-    <h2>Add Driver</h2><br>
+    <h2>Add Earning</h2><br>
     <div class="login">
         <form id="login" method="post" action="">
             <label for="amount"><b>Amount

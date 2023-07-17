@@ -22,6 +22,7 @@ if (isset($_GET['delete'])) {
             <th>Email</th>
             <th>username</th>
             <th>Phone</th>
+            <th>Salary</th>
             <th>Action</th>
         </tr>
         <?php foreach ($results as $row) { ?>
@@ -31,6 +32,7 @@ if (isset($_GET['delete'])) {
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['username']; ?></td>
             <td><?php echo $row['phone']; ?></td>
+            <td><?php echo $row['salary']; ?></td>
             <td><a href="update_driver.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="?delete=<?php echo $row['id']; ?>">Delete</a></td>
         </tr>
         <?php } ?>
