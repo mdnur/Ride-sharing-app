@@ -38,8 +38,8 @@ if (isset(($_GET['action']))) {
     <li>
         Add Fare
         <ul>
-            <li><a href="">Add Fare</a></li>
-            <li><a href="">Show Fare</a></li>
+            <li><a href="add_fare.php">Add Fare</a></li>
+            <li><a href="show_fare.php">Show Fare</a></li>
         </ul>
     </li>
     <li>

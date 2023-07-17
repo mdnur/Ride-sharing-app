@@ -8,7 +8,7 @@ if (isset($_POST['log'])) {
     $data = $_POST;
     print_r($data);
 
-    if ($SubLocation->update($data,$_GET['id'])) {
+    if ($SubLocation->update($data, $_GET['id'])) {
         header("Location: show_sub_location.php");
     } else {
         echo "Something went wrong";
@@ -18,7 +18,7 @@ if (isset($_POST['log'])) {
 $LocationTable = new LocationTable();
 $results = $LocationTable->readAll();
 $SubLocation = new SubLocationTable();
-$result =$SubLocation->readByid($_GET['id']);
+$result = $SubLocation->readByid($_GET['id']);
 
 ?>
 <center>
@@ -30,7 +30,9 @@ $result =$SubLocation->readByid($_GET['id']);
             </label>
             <select name="locationID" id="location">
                 <?php foreach ($results as $row) { ?>
-                    <option <?php if($row['id']==$result['locationID']){ echo 'selected';} ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <option <?php if ($row['id'] == $result['locationID']) {
+                                echo 'selected';
+                            } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                 <?php } ?>
             </select>
             <br><br>
