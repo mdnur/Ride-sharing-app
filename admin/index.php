@@ -61,8 +61,8 @@ if (isset(($_GET['action']))) {
     <li>
         Admin
         <ul>
-            <li><a href="">Add Admin</a></li>
-            <li><a href="">Show Admin</a></li>
+            <li><a href="add_admin.php">Add Admin</a></li>
+            <li><a href="show_admin.php">Show Admin</a></li>
         </ul>
     </li>
 </ul>

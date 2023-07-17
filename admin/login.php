@@ -51,7 +51,7 @@ Session::checkAdminLogin();
                 <label for="email"><b>Email
                     </b>
                 </label>
-                <input type="email" name="email" id="email" placeholder="Username">
+                <input type="email" name="email" id="email" placeholder="email">
                 <br><br>
 
                 <label for="password"><b>Password
