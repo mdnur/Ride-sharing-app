@@ -20,7 +20,7 @@ spl_autoload_register(function ($class) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TransitWise</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,7 +42,7 @@ spl_autoload_register(function ($class) {
 </head>
 
 <body>
-
+    <h1><a href="#">TransitWise</a></h1>
     <a href="index.php?action=logout">LOGOUT</a>
 
 

@@ -9,7 +9,7 @@ Session::checkLogin();
 <html>
 
 <head>
-    <title>Login Form</title>
+    <title>TransitWise Login </title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 

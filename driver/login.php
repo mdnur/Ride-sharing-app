@@ -22,7 +22,7 @@ Session::checkDriverLogin();
 <html>
 
 <head>
-    <title>Driver Login Form</title>
+    <title>TransitWise Driver</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 

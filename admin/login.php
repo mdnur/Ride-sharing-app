@@ -9,7 +9,7 @@ Session::checkAdminLogin();
 <html>
 
 <head>
-    <title>Admin Login Form</title>
+    <title>TransitWise Admin  </title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 

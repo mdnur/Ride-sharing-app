@@ -16,7 +16,8 @@ class RouteTable extends MainTable
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":" . $fieldName . "", $value);
         $stmt->execute();
-        return $stmt->rowCount(); //PDO::FETCH_OBJ
+        return $stmt->fetchAll();
+        // return $stmt->rowCount(); //PDO::FETCH_OBJ
     }
 
     public function getStatus($status)

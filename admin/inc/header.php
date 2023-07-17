@@ -20,7 +20,7 @@ Session::CheckAdminSession();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TransitWise</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,4 +42,5 @@ Session::CheckAdminSession();
 </head>
 
 <body>
+<h1><a href="#">TransitWise</a></h1>
     <a href="index.php">home</a>
