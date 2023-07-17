@@ -51,6 +51,14 @@ if (isset(($_GET['action']))) {
     </li>
 
     <li>
+        Route
+        <ul>
+            <li><a href="add_route.php">Add Route</a></li>
+            <li><a href="show_route.php">Show Route</a></li>
+        </ul>
+    </li>
+
+    <li>
         Admin
         <ul>
             <li><a href="">Add Admin</a></li>

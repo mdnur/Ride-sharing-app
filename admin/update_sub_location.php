@@ -45,7 +45,7 @@ $result = $SubLocation->readByid($_GET['id']);
 
 
 
-            <input type="submit" name="log" id="log" value="Update Sub Location">
+        <input type="submit" name="log" id="log" value="Update Sub Location">
             <br><br>
         </form>
     </div>
