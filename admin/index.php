@@ -65,6 +65,21 @@ if (isset(($_GET['action']))) {
             <li><a href="show_admin.php">Show Admin</a></li>
         </ul>
     </li>
+
+    <li>
+        Earning
+        <ul>
+            <li><a href="add_earning.php">Add Earning</a></li>
+            <li><a href="show_earning.php">Show Earning</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="show_users.php">Show users</a>
+    </li>
+    <li>
+        <a href="show_booking.php">Show Booking</a>
+    </li>
 </ul>
 <a href="?action=logout">LOGOUT</a>
 

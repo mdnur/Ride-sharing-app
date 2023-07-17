@@ -3,6 +3,8 @@
 use lib\Session;
 
 require_once $_SERVER['DOCUMENT_ROOT']. "/lib/Session.php";
+
+require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 require_once "RiderTable.php";
 require_once "Validation.php";
 class Login

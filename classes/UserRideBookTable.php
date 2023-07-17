@@ -7,7 +7,7 @@ use lib\Database;
 use lib\MainTable;
 
 class UserRideBookTable extends MainTable{
-    protected $table = "userRideBookTable";
+    protected $table = "userRideBook";
 
 
 

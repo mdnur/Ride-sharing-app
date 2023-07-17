@@ -61,13 +61,6 @@ Session::checkAdminLogin();
                 <br><br>
                 <input type="submit" name="log" id="log" value="Log In Here">
                 <br><br>
-                <input type="checkbox" id="check">
-                <span>Remember me</span>
-                <br><br>
-
-                <p>Don't Have a account?</p> <a href="SignUp.php">Sign Up</a>
-                <br><br>
-                 <a href="#">Forgot Password</a>
             </form>
         </div>
     </center>
