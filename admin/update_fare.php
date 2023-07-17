@@ -9,7 +9,7 @@ if (isset($_POST['log'])) {
     print_r($data);
 
 
-    if ($fare->update($data,$_GET['id'])) {
+    if ($fare->update($data, $_GET['id'])) {
         header("Location: show_fare.php");
     } else {
         echo "Something went wrong";
@@ -22,7 +22,7 @@ $results = $location->readAll();
 $result = $fare->readByid($_GET['id']);
 ?>
 <center>
-    <h2>Add Vehicle</h2><br>
+    <h2>Update Fare</h2><br>
     <div class="login">
         <form id="login" method="post" action="">
             <label for="Location_From"><b>Location From
@@ -35,7 +35,7 @@ $result = $fare->readByid($_GET['id']);
                             } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                 <?php } ?>
             </select>
-                            <br><br>
+            <br><br>
             <label for="Location_To"><b>Location To
                 </b>
             </label>
@@ -47,8 +47,13 @@ $result = $fare->readByid($_GET['id']);
                 <?php } ?>
             </select>
             <br><br>
-
-            <input type="submit" name="log" id="log" value="Update Sub Location">
+            <label for="fare"><b>Fare
+                </b>
+                
+            </label>
+            <input type="number" name="Price" id="fare" value="<?php echo $result['Price']; ?>">
+            <br><br>
+            <input type="submit" name="log" id="log" value="Update Fare ">
             <br><br>
         </form>
     </div>

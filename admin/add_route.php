@@ -65,7 +65,7 @@ $locations = $locations->readAll();
             </select>
 
                     <br><br>
-            <label for="location_to"><b>Location From
+            <label for="location_to"><b>Location To
                 </b>
             </label>
             <select name="LocationId_To" id="location_to">

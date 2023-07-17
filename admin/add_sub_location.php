@@ -16,7 +16,7 @@ $location = new LocationTable();
 $results = $location->readAll();
 ?>
 <center>
-    <h2>Add Vehicle</h2><br>
+    <h2>Add Sub Location</h2><br>
     <div class="login">
         <form id="login" method="post" action="">
             <label for="Location"><b>Location
@@ -37,7 +37,7 @@ $results = $location->readAll();
 
 
 
-            <input type="submit" name="log" id="log" value="Create Vehicle">
+            <input type="submit" name="log" id="log" value="Create Sub Location">
             <br><br>
         </form>
     </div>

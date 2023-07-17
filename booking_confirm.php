@@ -43,7 +43,7 @@ $tos = $location->getSubLocationByFieldName('locationID', $route['LocationId_To'
             </select>
 
             <br><br>
-            <label for="dropId"><b>Pick Up
+            <label for="dropId"><b>Drop off
                 </b>
             </label>
             <select name="dropId" id="dropId">

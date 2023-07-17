@@ -43,7 +43,7 @@ spl_autoload_register(function ($class) {
 
 <body>
 
-    <a href="?action=logout">LOGOUT</a>
+    <a href="index.php?action=logout">LOGOUT</a>
 
 
     <ul>
@@ -52,6 +52,6 @@ spl_autoload_register(function ($class) {
         <li><a href="profile.php">My Profile</a></li>
         <li><a href="bookRide.php">Book Ride</a></li>
         <li><a href="availableRoute.php">Available Routes</a></li>
-        <li><a href="my_history.php">My History</a></li>
-        <li><a href="my_credit.php">My Credits</a></li>
+        <!-- <li><a href="my_history.php">My History</a></li> -->
+        <!-- <li><a href="my_credit.php">My Credits</a></li> -->
     </ul>

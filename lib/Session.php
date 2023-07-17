@@ -44,6 +44,24 @@ class Session{
         }
     }
 
+    public static function CheckDriverSession(): void
+    {
+        self::init();
+        if(!self::get("driverLogin")){
+            self:: destory();
+           header("location:login.php");
+        }
+    }
+    public static function checkDriverLogin() {
+        self::init();
+        if(self::get("driverLogin")){
+           header("location:index.php");
+        }
+    }
+
+
+    
+
     public static function checkAdminLogin() {
         self::init();
         if(self::get("adminLogin")){

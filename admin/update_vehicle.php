@@ -14,7 +14,7 @@ if (isset($_POST['log'])) {
 }
 
 if (isset($_POST['back'])) {
-    header("Location: show_location.php");
+    header("Location: show_vehicle.php");
 }
 
 

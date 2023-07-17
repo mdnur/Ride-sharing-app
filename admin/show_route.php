@@ -48,7 +48,7 @@ $admin = new AdminTable();
                 <td><?php echo $row['lastTime']; ?></td>
                 <td><?php echo $row['driverPayment']; ?></td>
                 <td><?php echo $route->getStatus($row['status']); ?></td>
-                <td><?php echo ($admin->readByid($row['createdbyID']))['Name'] ?></td>
+                <td><?php echo ($admin->readByid($row['createdbyID']))['name'] ?></td>
                 <td><?php echo $row['created_at']; ?></td>    
                 <td><a href="update_route.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="">Delete</a></td>
             </tr>
