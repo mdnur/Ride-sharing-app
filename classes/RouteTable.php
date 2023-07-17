@@ -30,4 +30,12 @@ class RouteTable extends MainTable
                 break;
         }
     }
+
+    public function readAllStatus($id) {
+        $sql ="SELECT * FROM ".$this->table." WHERE status =:status  ORDER BY id DESC ";
+        $stmt =Database::prepare($sql);
+        $stmt->bindParam(":status" , $id );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

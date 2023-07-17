@@ -9,6 +9,7 @@ if (isset(($_GET['action']))) {
     }
 }
 ?>
-<a href="?action=logout">LOGOUT</a>
+
+<a href="">Book now</a>
 
 <?php include_once "inc/footer.php"; ?>
