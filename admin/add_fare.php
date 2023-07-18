@@ -7,7 +7,7 @@ if (isset($_POST['log'])) {
 //    print_r($data);
     $fare = new FareTable();
 
-    if ($fare->insert('fare', $data)) {
+    if ($fare->insert( $data)) {
         header("Location: show_fare.php");
     } else {
         echo "Something went wrong";

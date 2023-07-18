@@ -16,7 +16,7 @@
 
         $admin = new AdminTable();
     
-        if ($admin->insert('admin',$data)) {
+        if ($admin->insert($data)) {
             header("Location: show_admin.php");
         } else {
             echo "Something went wrong";

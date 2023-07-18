@@ -12,7 +12,7 @@ if (isset($_POST['log'])) {
     print_r($data);
     $route = new RouteTable();
 
-    if ($route->insert('route', $data)) {
+    if ($route->insert( $data)) {
         header("Location: index.php");
     } else {
         echo "Something went wrong";

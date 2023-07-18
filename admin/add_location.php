@@ -7,7 +7,7 @@ if (isset($_POST['log'])) {
     print_r($locationData);
     $location = new LocationTable();
 
-    if ($location->insert('location', $locationData)) {
+    if ($location->insert($locationData)) {
         header("Location: index.php");
     } else {
         echo "Something went wrong";

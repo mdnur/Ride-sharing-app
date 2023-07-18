@@ -5,7 +5,7 @@ if (isset($_POST['log'])) {
     $data = $_POST;
     $SubLocationTable = new SubLocationTable();
     print_r($data);
-    if ($SubLocationTable->insert('SubLocation', $data)) {
+    if ($SubLocationTable->insert($data)) {
         header("Location: show_sub_location.php");
     } else {
         echo "Something went wrong";

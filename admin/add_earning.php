@@ -7,7 +7,7 @@ if (isset($_POST['log'])) {
     print_r($data);
     $location = new EarningTable();
 
-    if ($location->insert('earning', $data)) {
+    if ($location->insert($data)) {
         header("Location: show_earning.php");
     } else {
         echo "Something went wrong";

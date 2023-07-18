@@ -10,8 +10,7 @@ if (isset($_POST['log'])) {
     $data = $_POST;
     $userRideBook = new UserRideBookTable();
 
-    print_r($data);
-    if ($userRideBook->insert('userRideBook', $data)) {
+    if ($userRideBook->insert($data)) {
         header("Location: index.php");
     } else {
         echo "Something went wrong";

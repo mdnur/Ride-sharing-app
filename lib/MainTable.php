@@ -17,10 +17,10 @@ abstract class MainTable
         $stmt->bindParam(":id",$id );
         return $stmt->execute();
     }
-    public function insert($table, $data) {
+    public function insert($data) {
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
-        $sql = "INSERT INTO " . $table . " (" . $columns . ") VALUES (" . $placeholders . ")";
+        $sql = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (" . $placeholders . ")";
         $stmt = Database::prepare($sql);
 
         foreach ($data as $column => $value) {

@@ -1,7 +1,9 @@
 <?php
 
 namespace lib;
-require_once $_SERVER['DOCUMENT_ROOT'].'/config/Config.php';
+// require_once $_SERVER['DOCUMENT_ROOT'].'/config/Config.php';
+require_once(realpath(dirname(__FILE__) . '/../config/Config.php'));
+
 
 use PDO;
 use PDOException;
@@ -21,7 +23,7 @@ class Database {
         }
         return self::$pdo;
     }
-
+    
     public static function prepare($sql): false|PDOStatement
     {
         return self::Connection()->prepare($sql);

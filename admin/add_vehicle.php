@@ -6,7 +6,7 @@ if (isset($_POST['log'])) {
     print_r($data);
     $vehicle = new VehicleTable();
 
-    if ($vehicle->insert('vehicle', $data)) {
+    if ($vehicle->insert($data)) {
         header("Location: show_vehicle.php");
     } else {
         echo "Something went wrong";

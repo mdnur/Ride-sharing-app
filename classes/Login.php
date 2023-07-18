@@ -85,7 +85,7 @@ class Login
         if(Session::get('flash_message') == null){
             // echo $riderTable->getRiderByFieldName('email',$post['email']);
             print_r($post);
-            if($riderTable->insert('rider',$post)){
+            if($riderTable->insert($post)){
                 return $this->login();
             }
         }

@@ -20,7 +20,7 @@
         $driverData = $_POST;
         $driver = new DriverTable();
     
-        if ($driver->insert('driver',$driverData)) {
+        if ($driver->insert($driverData)) {
             header("Location: show_driver.php");
         } else {
             echo "Something went wrong";
