@@ -2,6 +2,7 @@
 
 include_once "lib/Session.php";
 
+// require_once(realpath(dirname(__FILE__) . '/../lib/MainTable.php'));
 use lib\Session;
 
 Session::checkLogin();

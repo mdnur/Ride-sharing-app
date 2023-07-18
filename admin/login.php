@@ -1,6 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
+require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
+
 
 use lib\Session;
 
@@ -18,7 +20,9 @@ Session::checkAdminLogin();
     <?php
 
 
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/AdminLogin.php';
+    // include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/AdminLogin.php';
+    include_once(realpath(dirname(__FILE__) . '/../classes/AdminLogin.php'));
+
 
     if (isset($_POST['log'])) {
         $email = $_POST['email'];
@@ -62,13 +66,13 @@ Session::checkAdminLogin();
                 <label for="email"><b>Email
                     </b>
                 </label>
-                <input type="email" name="email" id="email" placeholder="Username" value="<?php echo $_COOKIE['emailA'] ?? '' ?>">
+                <input type="email" name="email" id="email" required placeholder="Username" value="<?php echo $_COOKIE['emailA'] ?? '' ?>">
                 <br><br>
 
                 <label for="password"><b>Password
                     </b>
                 </label>
-                <input type="Password" name="password" id="password" placeholder="Password" value="<?php echo $_COOKIE['passwordA'] ?? '' ?>">
+                <input type="Password" name="password" id="password" required placeholder="Password" value="<?php echo $_COOKIE['passwordA'] ?? '' ?>">
                 <br><br>
 
                 <input type="checkbox" id="remember" name="remember">

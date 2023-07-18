@@ -6,10 +6,14 @@ use lib\Session;
 
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
+require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
+
 
 spl_autoload_register(function ($class) {
-    include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
+    // include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
+    require_once(realpath(dirname(__FILE__) . '/../Classes/'. $class .'.php'));
+
 });
 
 
@@ -46,12 +50,13 @@ Session::checkDriverLogin();
         // print_r($_POST);
         if ($driver = $login->login()) {
             if ($remember != null) {
-                $expirationTime = time() + 60 * 60;
+                $expirationTime = time() + 10;
                 setcookie('emailD', $_POST['email'], $expirationTime); //1 hour
                 setcookie('passwordD', $_POST['password'], $expirationTime); //1 hour
             }
             Session::init();
             Session::set("driver", $driver);
+            $_SESSION['driver'] = $driver;
             Session::set("driverLogin", true);
             header("Location: index.php");
         } else {

@@ -6,10 +6,13 @@ use lib\Session;
 
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
+require_once(realpath(dirname(__FILE__) . '/../../lib/Session.php'));
+
 
 spl_autoload_register(function ($class) {
-    include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
+    include(realpath(dirname(__FILE__) . "/../../Classes/" . $class . ".php"));
+
+    // include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
 });
 
 

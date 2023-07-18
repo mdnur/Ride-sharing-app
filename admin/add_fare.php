@@ -2,9 +2,9 @@
 <?php
 if (isset($_POST['log'])) {
     unset($_POST['log']);
-    print_r($_POST);
+//    print_r($_POST);
     $data = $_POST;
-    print_r($data);
+//    print_r($data);
     $fare = new FareTable();
 
     if ($fare->insert('fare', $data)) {
