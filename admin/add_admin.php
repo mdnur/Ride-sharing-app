@@ -17,7 +17,8 @@
         $admin = new AdminTable();
     
         if ($admin->insert($data)) {
-            header("Location: show_admin.php");
+            // header("Location: show_admin.php");
+            echo "<script>window.location.href='show_admin.php';</script>";
         } else {
             echo "Something went wrong";
         }
