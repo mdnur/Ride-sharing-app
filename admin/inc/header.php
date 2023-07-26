@@ -2,6 +2,7 @@
 
 // require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
 require_once(realpath(dirname(__FILE__) . '/../../lib/Session.php'));
+require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 
 
 spl_autoload_register(function ($class) {
@@ -12,8 +13,9 @@ spl_autoload_register(function ($class) {
 
 
 
-// require_once "lib/Session.php";
 use lib\Session;
+use lib\Helper;
+
 
 Session::CheckAdminSession();
 ?>

@@ -1,4 +1,8 @@
-<?php include_once "inc/header.php"; ?>
+<?php
+
+use lib\Helper;
+
+ include_once "inc/header.php"; ?>
 <?php
 
 
@@ -21,7 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($driver->insert($driverData)) {
         // header("Location: show_driver.php");
-        echo "<script>window.location.href='show_driver.php';</script>";
+        // echo "<script>window.location.href='show_driver.php';</script>";
+        Helper::header('show_driver.php');
+    
 
     } else {
         echo "Something went wrong";
@@ -71,12 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
 
-
-
-                <div class="form-group">
-                    <label for="salary"> Salary</label>
-                    <input type="number" min="0" class="form-control" id="salary" name="salary" required>
-                </div>
 
 
                 <div class="form-group">

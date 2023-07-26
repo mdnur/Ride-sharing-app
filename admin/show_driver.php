@@ -36,7 +36,6 @@ $results = $DriverTable->readAll();
                         <th>Email</th>
                         <th>Username</th>
                         <th>Phone</th>
-                        <th>Salary</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,8 +46,7 @@ $results = $DriverTable->readAll();
                         <th>Email</th>
                         <th>Username</th>
                         <th>Phone</th>
-                        <th>Salary</th>
-                        <th>Salary</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -59,7 +57,6 @@ $results = $DriverTable->readAll();
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['username']; ?></td>
                             <td><?php echo $row['phone']; ?></td>
-                            <td><?php echo $row['salary']; ?></td>
                             <td><a class="btn btn-primary" href="update_driver.php?id=<?php echo $row['id']; ?>">Edit</a> <a class="btn btn-danger" href="?delete=<?php echo $row['id']; ?>">Delete</a></td>
                         </tr>
                     <?php } ?>

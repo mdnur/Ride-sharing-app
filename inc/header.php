@@ -3,6 +3,7 @@ require_once "lib/Session.php";
 
 use lib\Session;
 
+
 Session::checkSession();
 
 spl_autoload_register(function ($class) {
