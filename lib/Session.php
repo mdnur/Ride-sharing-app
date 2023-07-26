@@ -76,4 +76,8 @@ class Session{
 //        header("Location:login.php?action=logout");
     }
 
+    public static function getName($role){
+        return Session::get($role)['name'];
+    }
+
 }

@@ -1,9 +1,7 @@
 <?php include_once "inc/header.php"; ?>
 <?php
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
-    print_r($data);
     $vehicle = new VehicleTable();
 
     if ($vehicle->update($data,$_GET['id'])) {

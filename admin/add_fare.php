@@ -1,10 +1,7 @@
 <?php include_once "inc/header.php"; ?>
 <?php
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
-//    print_r($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
-//    print_r($data);
     $fare = new FareTable();
 
     if ($fare->insert( $data)) {

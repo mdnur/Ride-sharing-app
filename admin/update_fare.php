@@ -2,13 +2,8 @@
 <?php
 
 $fare = new FareTable();
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
-    print_r($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
-    print_r($data);
-
-
     if ($fare->update($data, $_GET['id'])) {
         header("Location: show_fare.php");
     } else {

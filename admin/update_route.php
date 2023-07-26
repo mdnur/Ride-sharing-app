@@ -5,14 +5,11 @@ use lib\Session;
 
 $route = new RouteTable();
 
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userID = (Session::get('admin')['id']);
-    print_r($userID);
     $data = $_POST;
     $data['createdbyID'] = $userID;
     $data['created_at'] = date("Y-m-d H:i:s", time());
-    print_r($data);
 
     if ($route->update($data,$_GET['id'])) {
         header("Location: show_route.php");

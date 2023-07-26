@@ -4,7 +4,7 @@
 
     // include_once 'classes/Login.php';
 
-    if (isset($_POST['log'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($_POST['password'] != $_POST['confirm_password']){
             echo "Password and Confirm Password does not match";
             exit();

@@ -1,9 +1,7 @@
 <?php include_once "inc/header.php"; ?>
 <?php
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $locationData = $_POST;
-    print_r($locationData);
     $location = new LocationTable();
 
     if ($location->update($locationData,$_GET['id'])) {

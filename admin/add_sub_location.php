@@ -1,10 +1,10 @@
 <?php include_once "inc/header.php"; ?>
 <?php
-if (isset($_POST['log'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     unset($_POST['log']);
     $data = $_POST;
     $SubLocationTable = new SubLocationTable();
-    print_r($data);
+
     if ($SubLocationTable->insert($data)) {
         header("Location: show_sub_location.php");
     } else {

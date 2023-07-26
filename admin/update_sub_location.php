@@ -3,10 +3,8 @@
 
 $SubLocation = new SubLocationTable();
 
-if (isset($_POST['log'])) {
-    unset($_POST['log']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
-    print_r($data);
 
     if ($SubLocation->update($data, $_GET['id'])) {
         header("Location: show_sub_location.php");
