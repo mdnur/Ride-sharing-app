@@ -5,11 +5,11 @@
 $DriverTable = new DriverTable();
 $results = $DriverTable->readAll();
 
-// if (isset($_GET['delete'])) {
-//     $id = $_GET['delete'];
-//     $DriverTable->delete($id);
-//     header("Location: show_driver.php");
-// }
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $DriverTable->delete($id);
+    header("Location: show_driver.php");
+}
 
 ?>
 <!-- Page Heading -->

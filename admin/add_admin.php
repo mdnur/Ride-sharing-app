@@ -1,76 +1,90 @@
 <?php include_once "inc/header.php"; ?>
-    <?php
+<?php
 
 
-    // include_once 'classes/Login.php';
+// include_once 'classes/Login.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if($_POST['password'] != $_POST['confirm_password']){
-            echo "Password and Confirm Password does not match";
-            exit();
-        }
-        unset($_POST['confirm_password']);
-        unset($_POST['log']);
-        $_POST['role'] = 'admin';
-        $data = $_POST;
-
-        $admin = new AdminTable();
-    
-        if ($admin->insert($data)) {
-            // header("Location: show_admin.php");
-            echo "<script>window.location.href='show_admin.php';</script>";
-        } else {
-            echo "Something went wrong";
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['password'] != $_POST['confirm_password']) {
+        echo "Password and Confirm Password does not match";
+        exit();
     }
+    unset($_POST['confirm_password']);
+    unset($_POST['log']);
+    $_POST['role'] = 'admin';
+    $data = $_POST;
+
+    $admin = new AdminTable();
+
+    if ($admin->insert($data)) {
+        // header("Location: show_admin.php");
+        echo "<script>window.location.href='show_admin.php';</script>";
+    } else {
+        echo "Something went wrong";
+    }
+}
 
 
-    ?>
+?>
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+
+</div>
+
+<!-- Content Row -->
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Admin</h6>
+    </div>
+    <div class="card-body">
+        <form id="login" method="post" action="">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="John Deo">
+                <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="name" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="john_deo">
+                <!-- <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
 
 
-    <center>
-        <h2>Add Admin</h2><br>
-        <div class="login">
-            <form id="login" method="post" action="">
-                <label for="name"><b>Name
-                    </b>
-                </label>
-                <input type="text" name="name" id="name" placeholder="Name">
-                <br><br>
-                <label for="username"><b>Username
-                    </b>
-                </label>
-                <input type="text" name="username" id="username" placeholder="Username">
-                <br><br>
-                <label for="email"><b>Email
-                    </b>
-                </label>
-                <input type="email" name="email" id="email" placeholder="email">
-                <br><br>
-                <label for="phone"><b>phone
-                    </b>
-                </label>
-                <input type="text" id="phone" name="phone" pattern="^01[3456789]\d{8}$" placeholder="01XXXXXXXXX" title="Bangladesh phone number: 01XXXXXXXXX">
-                <br><br>
-
-                <label for="password"><b>password
-                    </b>
-                </label>
-                <input type="password" name="password" id="password" placeholder="password">
-                <br><br>
-
-                <label for="confirm_password"><b>Confirm Password
-                    </b>
-                </label>
-                <input type="Password" name="confirm_password" id="confirm_password" placeholder="Confirm password">
-                <br><br>
-                <input type="submit" name="log" id="log" value="Create Admin">
+            <div class="form-group">
+                <label for="phone"> Phone</label>
+                <input type="phone" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" name="phone" pattern="^01[3456789]\d{8}$" placeholder="01XXXXXXXXX" title="Bangladesh phone number: 01XXXXXXXXX">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
 
 
-              
-            </form>
-        </div>
-    </center>
-</body>
 
-</html>
+            <div class="form-group">
+                <label for="InputPassword">Password</label>
+                <input type="password" class="form-control" id="InputPassword" placeholder="Password" name="password">
+            </div>
+
+            <div class="form-group">
+                <label for="InputConfirmPassword1">Confirm Password</label>
+                <input type="password" class="form-control" id="InputConfirmPassword1" name="confirm_password" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+            </div>
+            <button type="submit" class="btn btn-primary">Create Admin Account</button>
+
+        </form>
+    </div>
+</div>
+<?php include_once "inc/footer.php"; ?>

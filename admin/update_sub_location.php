@@ -1,13 +1,14 @@
 <?php include_once "inc/header.php"; ?>
 <?php
 
+use lib\Helper;
 $SubLocation = new SubLocationTable();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
 
     if ($SubLocation->update($data, $_GET['id'])) {
-        header("Location: show_sub_location.php");
+        Helper::header('show_sub_location.php');
     } else {
         echo "Something went wrong";
     }
@@ -19,33 +20,48 @@ $SubLocation = new SubLocationTable();
 $result = $SubLocation->readByid($_GET['id']);
 
 ?>
-<center>
-    <h2>Add Sub Location</h2><br>
-    <div class="login">
+
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Point</h1>
+
+</div>
+
+<!-- Content Row -->
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Point</h6>
+    </div>
+    <div class="card-body">
         <form id="login" method="post" action="">
-            <label for="Location"><b>Location
-                </b>
-            </label>
-            <select name="locationID" id="location">
+            <div class="form-group">
+                <label for="locationID">Location</label>
+                <select name="locationID" class="form-control" id="locationID">
+
                 <?php foreach ($results as $row) { ?>
                     <option <?php if ($row['id'] == $result['locationID']) {
                                 echo 'selected';
                             } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                 <?php } ?>
-            </select>
-            <br><br>
-            <label for="name"><b>Sub Location
-                </b>
-            </label>
-            <input type="text" name="name" id="name" placeholder="name" value="<?php echo $result['name']; ?>">
-            <br><br>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="name">Point Name</label>
+                <input type="name" class="form-control" name="name" id="name" aria-describedby="nameHelp"  value="<?php echo $result['name']; ?>" >
+                <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
 
 
+            <div class="form-group">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Point </button>
 
-
-        <input type="submit" name="log" id="log" value="Update Sub Location">
-            <br><br>
         </form>
     </div>
-</center>
+</div>
 <?php include_once "inc/footer.php"; ?>

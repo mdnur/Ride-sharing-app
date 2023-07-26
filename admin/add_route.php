@@ -1,5 +1,6 @@
 <?php include_once "inc/header.php"; ?>
 <?php
+
 use lib\Session;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -11,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $route = new RouteTable();
 
-    if ($route->insert( $data)) {
+    if ($route->insert($data)) {
         header("Location: index.php");
     } else {
         echo "Something went wrong";
@@ -29,86 +30,125 @@ $vehicles = $vehicles->readAll();
 $locations = new LocationTable();
 $locations = $locations->readAll();
 ?>
-<center>
-    <h2>Add Route</h2><br>
-    <div class="login">
+
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Route</h1>
+
+</div>
+
+<!-- Content Row -->
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Route</h6>
+    </div>
+    <div class="card-body">
         <form id="login" method="post" action="">
+            <div class="form-group">
+                <label for="driverID">Driver Name</label>
+                <select name="driverID" class="form-control" id="driverID">
+                    <?php foreach ($drivers as $row) { ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
 
-            <label for="driver"><b>Driver
-                </b>
-            </label>
-            <select name="driverID" id="driver">
-                <?php foreach ($drivers as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                <?php } ?>
-            </select>
-            <br><br>
-            <label for="vehicle"><b>Vehicle
-                </b>
-            </label>
-            <select name="vehicleID" id="vehicle">
-                <?php foreach ($vehicles as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['make']; ?></option>
-                <?php } ?>
-            </select>
+            <div class="form-group">
+                <label for="vehicleID">Vehicle Name</label>
+                <select name="vehicleID" class="form-control" id="vehicleID">
+                    <?php foreach ($vehicles as $row) { ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['make']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label for="locationID">From</label>
+                <select name="locationId_From" class="form-control" id="locationFrom">
+                    <?php foreach ($locations as $row) { ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
 
-            <br><br>
-            <label for="location_from"><b>Location From
-                </b>
-            </label>
-            <select name="LocationId_From" id="location_from">
-                <?php foreach ($locations as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                <?php } ?>
-            </select>
-
-                    <br><br>
-            <label for="location_to"><b>Location To
-                </b>
-            </label>
-            <select name="LocationId_To" id="location_to">
-                <?php foreach ($locations as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                <?php } ?>
-            </select>
+            <div class="form-group">
+                <label for="locationID">To</label>
+                <select name="locationId_To" class="form-control" id="locationTo"></select>
+            </div>
 
 
-            <br><br>
-            <label for="fare"><b>Fare
-                </b>
-            </label>
-            <input type="number" name="fare" id="fare" placeholder="fare">
+            <div class="form-group">
+                <label for="fare">Fare</label>
+                <input type="number" min="0" class="form-control" id="fare" name="fare" aria-describedby="usernameHelp">
 
+            </div>
 
-            <br><br>
-            <label for="driverPayment"><b>Driver Payment
-                </b>
-            </label>
-            <input type="number" name="driverPayment" id="driverPayment" placeholder="Driver Payment">
-            <br><br>
+            <div class="form-group">
+                <label for="driverPayment">Driver Payment</label>
+                <input type="number" min="0" class="form-control" id="driverPayment" name="driverPayment" aria-describedby="driverPaymentHelp">
 
-            <label for="firstTime"><b>First Time: </b></label>
-            <input type="datetime-local" id="firstTime" name="firstTime">
+            </div>
 
-            <br><br>
-            <label for="LastTime"><b>Last Time: </b></label>
-            <input type="datetime-local" id="LastTime" name="LastTime">
+            <div class="form-group">
+                <label for="StartJourneyTime">Start Journey Date & Time</label>
+                <input type="datetime-local" class="form-control" id="StartJourneyTime" name="StartJourneyTime" aria-describedby="StartJourneyTimeHelp" placeholder="john_deo">
+                <!-- <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
 
-            <br><br>
+            <div class="form-group">
+                <label for="DepartureTime">Departure Date & Time</label>
+                <input type="datetime-local" class="form-control" id="DepartureTime" name="DepartureTime" aria-describedby="DepartureTimeHelp" placeholder="john_deo">
+                <!-- <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
 
-            <label for="status"><b>status
-                </b>
-            </label>
-            <select name="status" id="status">
-                <option value="1">Active</option>
-                <option value="2">Draft</option>
-            </select>
+            <div class="form-group">
+                <label for="status">Status </label>
+                <select name="status" class="form-control" id="status">
+                    <option value="0">Active</option>
+                </select>
+            </div>
 
-            <br><br>
-            <input type="submit" name="log" id="log" value="Create Route">
-            <br><br>
+            <div class="form-group">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+            </div>
+            <button type="submit" class="btn btn-primary">Create Route </button>
+
         </form>
     </div>
-</center>
+</div>
+
+<script>
+    // Get references to the two dropdowns
+    const locationFromDropdown = document.getElementById('locationFrom');
+    const locationToDropdown = document.getElementById('locationTo');
+
+    // Event listener for the "From" dropdown
+    locationFromDropdown.addEventListener('change', updateToDropdown);
+
+    // Function to update the "To" dropdown options
+    function updateToDropdown() {
+        const selectedFromId = locationFromDropdown.value;
+
+        // Clear existing options in the "To" dropdown
+        locationToDropdown.innerHTML = '';
+
+        // Re-populate the "To" dropdown options based on the selected "From" value
+        <?php foreach ($locations as $row) { ?>
+            // Skip the option with the same ID as the selected "From" value
+            if (<?php echo $row['id']; ?> !== parseInt(selectedFromId)) {
+                const option = document.createElement('option');
+                option.value = <?php echo $row['id']; ?>;
+                option.textContent = '<?php echo $row['name']; ?>';
+                locationToDropdown.appendChild(option);
+            }
+        <?php } ?>
+    }
+
+    // Call the updateToDropdown function initially to set the initial options
+    updateToDropdown();
+</script>
 <?php include_once "inc/footer.php"; ?>

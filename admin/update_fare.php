@@ -1,11 +1,13 @@
 <?php include_once "inc/header.php"; ?>
 <?php
 
+use lib\Helper;
+
 $fare = new FareTable();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST;
     if ($fare->update($data, $_GET['id'])) {
-        header("Location: show_fare.php");
+        Helper::header('show_fare.php');
     } else {
         echo "Something went wrong";
     }
@@ -16,41 +18,92 @@ $results = $location->readAll();
 
 $result = $fare->readByid($_GET['id']);
 ?>
-<center>
-    <h2>Update Fare</h2><br>
-    <div class="login">
+
+
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Fare</h1>
+
+</div>
+
+<!-- Content Row -->
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Fare</h6>
+    </div>
+    <div class="card-body">
         <form id="login" method="post" action="">
-            <label for="Location_From"><b>Location From
-                </b>
-            </label>
-            <select name="locationId_From" id="location_From">
-                <?php foreach ($results as $row) { ?>
-                    <option <?php if ($row['id'] == $result['LocationId_From']) {
-                                echo 'selected';
-                            } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                <?php } ?>
-            </select>
-            <br><br>
-            <label for="Location_To"><b>Location To
-                </b>
-            </label>
-            <select name="locationId_To" id="location_To">
-                <?php foreach ($results as $row) { ?>
-                    <option <?php if ($row['id'] == $result['LocationId_To']) {
-                                echo 'selected';
-                            } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                <?php } ?>
-            </select>
-            <br><br>
-            <label for="fare"><b>Fare
-                </b>
-                
-            </label>
-            <input type="number" name="Price" id="fare" value="<?php echo $result['Price']; ?>">
-            <br><br>
-            <input type="submit" name="log" id="log" value="Update Fare ">
-            <br><br>
+            <div class="form-group">
+                <label for="locationID">From</label>
+                <select name="locationId_From" class="form-control" id="locationFrom">
+                    <?php foreach ($results as $row) { ?>
+                        <option value="<?php echo $row['id']; ?>" <?php echo ($row['id'] == $result['locationId_From']) ? 'selected' : ''; ?>>
+                            <?php echo $row['name']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="locationID">To</label>
+
+                <select name="locationId_To" class="form-control" id="locationTo">
+                    <?php foreach ($results as $row) { ?>
+                        <option value="<?php echo $row['id']; ?>" <?php echo ($row['id'] == $result['locationId_To']) ? 'selected' : ''; ?>>
+                            <?php echo $row['name']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Fare</label>
+                <input type="name" class="form-control" name="Price" id="name" aria-describedby="nameHelp" value="<?php echo $result['Price']; ?>">
+                <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+
+            <div class="form-group">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Fare </button>
+
         </form>
     </div>
-</center>
+</div>
+<script>
+    // Get references to the two dropdowns
+    const locationFromDropdown = document.getElementById('locationFrom');
+    const locationToDropdown = document.getElementById('locationTo');
+
+    // Event listener for the "From" dropdown
+    locationFromDropdown.addEventListener('change', updateToDropdown);
+
+    // Function to update the "To" dropdown options
+    function updateToDropdown() {
+        const selectedFromId = locationFromDropdown.value;
+
+        // Clear existing options in the "To" dropdown
+        locationToDropdown.innerHTML = '';
+
+        // Re-populate the "To" dropdown options based on the selected "From" value
+        <?php foreach ($results as $row) { ?>
+            // Skip the option with the same ID as the selected "From" value
+            if (<?php echo $row['id']; ?> !== parseInt(selectedFromId)) {
+                const option = document.createElement('option');
+                option.value = <?php echo $row['id']; ?>;
+                option.textContent = '<?php echo $row['name']; ?>';
+                locationToDropdown.appendChild(option);
+            }
+        <?php } ?>
+    }
+
+    // Call the updateToDropdown function initially to set the initial options
+    updateToDropdown();
+</script>
+
+
+
 <?php include_once "inc/footer.php"; ?>

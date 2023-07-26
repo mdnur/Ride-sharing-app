@@ -63,12 +63,12 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubLocation" aria-expanded="true" aria-controls="collapseSubLocation">
             <i class="fas fa-fw fa-folder"></i>
-            <span>sub Location</span>
+            <span>Point</span>
         </a>
         <div id="collapseSubLocation" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_sub_location.php">Add sub Location</a>
-                <a class="collapse-item" href="show_sub_location.php">Show Location</a>
+                <a class="collapse-item" href="add_sub_location.php">Add Point</a>
+                <a class="collapse-item" href="show_sub_location.php">Show all Points</a>
             </div>
         </div>
     </li>
