@@ -49,7 +49,7 @@ $results = $location->readAll();
             </div>
             <div class="form-group">
                 <label for="name">Fare</label>
-                <input type="name" class="form-control" name="Price" id="name" aria-describedby="nameHelp" placeholder="Bashundara R/A">
+                <input type="number" min="0" class="form-control" name="Price" id="name" aria-describedby="nameHelp" placeholder="Bashundara R/A">
                 <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
             </div>
 
