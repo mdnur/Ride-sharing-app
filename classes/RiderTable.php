@@ -24,4 +24,13 @@ class RiderTable extends MainTable{
         $stmt->execute();
         return $stmt->rowCount();//PDO::FETCH_OBJ
     }
+
+    public function getRiderByFieldNameS($fieldName,$value){
+        $sql = "SELECT * FROM ".$this->table." WHERE  ".$fieldName."= :" .$fieldName;
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":".$fieldName."",$value);
+        $stmt->execute();
+    }
+
+   
 }

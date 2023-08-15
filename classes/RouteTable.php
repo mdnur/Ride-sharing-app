@@ -10,9 +10,31 @@ class RouteTable extends MainTable
     protected $table = "route";
 
 
-    public function getRouteByFieldName($fieldName, $value)
+    public function getRouteByFieldNameByToday($fieldName, $value)
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName . " AND DATE(StartJourneyTime) = CURDATE()";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":" . $fieldName . "", $value);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount(); //PDO::FETCH_OBJ
+    }
+
+    public function getRouteByFieldNameAndDate($fieldName, $value, $date)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName . " AND DATE(StartJourneyTime) = :date";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":" . $fieldName . "", $value);
+        $stmt->bindParam(":date", $date);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount(); //PDO::FETCH_OBJ
+    }
+
+
+    public function getRouteByFieldName($fieldName, $value )
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName  ;
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":" . $fieldName . "", $value);
         $stmt->execute();
@@ -45,5 +67,21 @@ class RouteTable extends MainTable
         $stmt->bindParam(":status", $id);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function getDriverIncomeByMonth($driverID, $month, $year)
+    {
+        $sql = "SELECT SUM(driverPayment) AS totalPayment
+            FROM route
+            WHERE driverID = :driverID
+            AND MONTH(StartJourneyTime) = :month
+            AND YEAR(StartJourneyTime) = :year
+            AND status = 2";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":driverID", $driverID);
+        $stmt->bindParam(":month", $month);
+        $stmt->bindParam(":year", $year);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

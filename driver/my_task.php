@@ -1,5 +1,6 @@
 <?php include_once "inc/header.php"; ?>
 <?php
+
 use lib\Session;
 
 
@@ -7,7 +8,8 @@ $route = new RouteTable();
 
 $userID = (Session::get('driver')['id']);
 
-$results = $route->getRouteByFieldName('driverID',$userID);
+// $results = $route->getRouteByFieldName('driverID', $userID);
+$results = $route->getRouteByFieldName('driverID', $userID);
 
 
 
@@ -21,42 +23,76 @@ $admin = new AdminTable();
 
 
 ?>
-<center>
-    <h2>Show Task</h2><br>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>driverID</th>
-            <th>vehicleID</th>
-            <th>Location From</th>
-            <th>Location To</th>
-            <th>Fare</th>
-            <th>First Time</th>
-            <th>Last Time</th>
-            <th>Driver Payment</th>
-            <th>Status</th>
-            <th>Created by</th>
-            <th>created At</th>
-            <!-- <th>Action</th> -->
-        </tr>
-        <?php foreach ($results as $row) { ?>
-            <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo ($drivers->readByid($row['driverID']))['name'] ?></td>
-                <td><?php echo ($vehicles->readByid($row['vehicleID']))['make'] ?></td>
-                <td><?php echo ($locations->readByid($row['LocationId_From']))['name'] ?></td>
-                <td><?php echo ($locations->readByid($row['LocationId_To']))['name'] ?></td>
-                <td><?php echo $row['fare']; ?></td>
-                <td><?php echo $row['firstTime']; ?></td>
-                <td><?php echo $row['lastTime']; ?></td>
-                <td><?php echo $row['driverPayment']; ?></td>
-                <td><?php echo $route->getStatus($row['status']); ?></td>
-                <td><?php echo ($admin->readByid($row['createdbyID']))['name'] ?></td>
-                <td><?php echo $row['created_at']; ?></td>    
-                <!-- <td><a href="update_route.php?id=<?php //echo $row['id']; ?>">Edit</a> | <a href="">Delete</a></td> -->
-            </tr>
-        <?php } ?>
-    </table>
-</center>
+<div class="card-header">My Task All</div>
+
+<div class="card-body">
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>driver Name</th>
+                    <!-- <th>vehicleID</th> -->
+                    <th>From</th>
+                    <th>To</th>
+                    <!-- <th>Fare</th> -->
+                    <th>Start At </th>
+                    <th>End At</th>
+                    <!-- <th>Driver Payment</th> -->
+                    <th>Status</th>
+                    <th>Created by</th>
+                    <!-- <th>created At</th> -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($results as $row) { ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo ($drivers->readByid($row['driverID']))['name'] ?></td>
+                        <!-- <td><?php //echo ($vehicles->readByid($row['vehicleID']))['make']
+                                    ?></td> -->
+                        <td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
+                        <td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
+                        <!-- <td><?php //echo $row['Fare'];
+                                    ?></td> -->
+                        <td><?php echo TimeHelper::getFormattedTime1($row['StartJourneyTime']); ?></td>
+                        <td><?php echo TimeHelper::getFormattedTime1($row['DepartureTime']); ?></td>
+                        <!-- <td><?php //echo $row['driverPayment'];
+                                    ?></td> -->
+                        <td><span class="badge badge-pill 
+                            <?php if ($row['status'] == 2) {
+                                echo "badge-success";
+                            } else if ($row['status'] == 1) {
+                                echo "badge-info";
+                            } else if ($row['status'] == 3) {
+                                echo "badge-danger";
+                            } else if ($row['status'] == 0) {
+                                echo "badge-primary";
+                            } ?>
+                        ">
+                                <?php echo $route->getStatus($row['status']); ?></span></td>
+                        <td><?php echo ($admin->readByid($row['createdbyID']))['name'] ?></td>
+                        <!-- <td><?php //echo $row['created_at'];
+                                    ?></td> -->
+                        <td>
+                            <a class="btn btn-primary" href="ViewRiderOfRoute.php?id=<?php echo $row['id']; ?>">View All Rider</a>
+                            <?php if ($row['status'] == 0) { ?>
+                                <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=1">Processing</a>
+                            <?php } else if ($row['status'] == 1) { ?>
+                                <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=2">Complete</a>
+                            <?php } ?>
+                        </td>
+
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <?php include_once "inc/footer.php"; ?>
