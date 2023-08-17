@@ -31,10 +31,21 @@ class RouteTable extends MainTable
         // return $stmt->rowCount(); //PDO::FETCH_OBJ
     }
 
-
-    public function getRouteByFieldName($fieldName, $value )
+    public function getRouteByFieldNameAndDateAndFromToday($fieldName, $value, $date)
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName  ;
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName . " AND DATE(StartJourneyTime) >= :date ORDER BY StartJourneyTime DESC";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":" . $fieldName . "", $value);
+        $stmt->bindParam(":date", $date);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount(); //PDO::FETCH_OBJ
+    }
+
+
+    public function getRouteByFieldName($fieldName, $value)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":" . $fieldName . "", $value);
         $stmt->execute();
@@ -68,7 +79,24 @@ class RouteTable extends MainTable
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
+    public function readAllByFromAndTo($from, $to)
+    {
+        $sql = "SELECT r.fare ,r.StartJourneyTime,r.DepartureTime, lf.name AS fromLocationName,
+                lt.name AS toLocationName
+                FROM route r
+                JOIN location lf ON r.locationId_From = lf.id
+                JOIN location lt ON r.locationId_To = lt.id
+                WHERE r.locationId_From = :from
+                AND r.locationId_To = :to
+                AND DATE(r.StartJourneyTime) >= CURDATE() 
+                AND r.status = 0 
+                ORDER BY r.id DESC";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":from", $from);
+        $stmt->bindParam(":to", $to);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function getDriverIncomeByMonth($driverID, $month, $year)
     {
         $sql = "SELECT SUM(driverPayment) AS totalPayment

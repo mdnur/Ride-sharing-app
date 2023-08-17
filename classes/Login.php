@@ -92,7 +92,7 @@ class Login
     }
 
     public function signUpValidation($post){
-        $post['name'] =Validation::required($post['name'], 'Name');
+        $post['name'] =Validation::required($post['name'], 'name');
         $post['email'] = Validation::required($post['email'], 'email');
         $post['password'] = Validation::required($post['password'], 'password');
         $post['username'] = Validation::required($post['username'], 'username');

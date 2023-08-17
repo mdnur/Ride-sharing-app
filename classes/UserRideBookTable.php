@@ -38,4 +38,41 @@ class UserRideBookTable extends MainTable
         $stmt->execute();
         return $stmt->fetchAll(); //PDO::FETCH_OBJ
     }
+
+    public function getRideBookByRiderId($riderId)
+    {
+        $sql = "SELECT urb.id AS rideBookID, urb.riderID, urb.pickUpId, urb.dropId,
+        p.name AS pickUpLocation, d.name AS dropLocation,
+        dr.name AS driverName, r.status AS rideStatus,
+        r.Fare AS rideFare, r.StartJourneyTime
+        FROM userRideBook urb
+        JOIN SubLocation p ON urb.pickUpId = p.id
+        JOIN SubLocation d ON urb.dropId = d.id
+        JOIN route r ON urb.rideBookID = r.id
+        JOIN driver dr ON r.driverID = dr.id
+        WHERE urb.riderID = :riderID ORDER BY r.StartJourneyTime DESC;";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":riderID", $riderId);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount();//PDO::FETCH_OBJ
+    }
+
+    public function getStatus($status)
+    {
+        switch ($status) {
+            case 0:
+                return "Active";
+                break;
+            case 1:
+                return "Processing";
+                break;
+            case 2:
+                return "Completed";
+                break;
+            case 3:
+                return "Canceled";
+                break;
+        }
+    }
 }
