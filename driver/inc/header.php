@@ -19,7 +19,6 @@ require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 require_once('spl_autoload.php');
 
 
-date_default_timezone_set("Asia/Dhaka");
 // require_once "lib/Session.php";
 
 Session::CheckDriverSession();

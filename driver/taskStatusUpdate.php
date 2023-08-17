@@ -9,5 +9,5 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     unset($_GET['id']);
     $route = new RouteTable();
     $route->update($_GET, $id );
-    Helper::header('my_task.php');
+    Helper::header('index.php');
 }

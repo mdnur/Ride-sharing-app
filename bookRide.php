@@ -4,51 +4,83 @@ include_once "inc/header.php";
 
 use lib\Session;
 
+$route = new RouteTable();
+$results = $route->getRouteByFieldNameAndDateAndFromToday('status', "0",date('Y-m-d'));
 
+$locations = new LocationTable();
 
 ?>
-<center>
-    <h2>Book Ride</h2><br>
-    <div class="login">
-        <?php
+<main class="py-4 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header justify-content-between d-flex">
+                        <div class="">
+                            <h5 class="mt-10">My Route Booking</h5>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto ">
+                                        <label class="sr-only" for="inlineFormInputName2">Name</label>
+                                        <input type="text" class="form-control " id="inlineFormInputName2" placeholder="search ...">
 
+                                    </div>
+                                    <div class="col-auto ">
+                                        <label class="sr-only" for="inlineFormInputName2">Name</label>
+                                        <select class="form-control " id="inlineFormInputName2" placeholder="search ...">
+                                            <option value="Today">Today</option>
+                                            <option value="Tomorrow">Tomorrow</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto ">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-        $route = new RouteTable();
-        $results = $route->readAllStatus(1);
-
-        $locations = new LocationTable();
-
-
-        ?>
-
-
-        <center>
-            <h2>Show Route</h2><br>
-
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Location From</th>
-                    <th>Location To</th>
-                    <th>Fare</th>
-                    <th>First Time</th>
-                    <th>Last Time</th>
-                    <th>Action</th>
-                </tr>
-                <?php foreach ($results as $row) { ?>
-                    <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo ($locations->readByid($row['LocationId_From']))['name'] ?></td>
-                        <td><?php echo ($locations->readByid($row['LocationId_To']))['name'] ?></td>
-                        <td><?php echo $row['fare']; ?></td>
-                        <td><?php echo $row['firstTime']; ?></td>
-                        <td><?php echo $row['lastTime']; ?></td>
-                        <td><a href="booking_confirm.php?id=<?php echo $row['id']; ?>">Book</a> </td>
-                    </tr>
-                <?php } ?>
-            </table>
-        </center>
-        <?php include_once "inc/footer.php"; ?>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>From </th>
+                                        <th>To</th>
+                                        <th>Fare</th>
+                                        <th>Start at</th>
+                                        <th>Ends at</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <?php $count = 1; ?>
+                                <tbody>
+                                    <?php foreach ($results as $row) { ?>
+                                        <tr>
+                                            <td><?php echo $count++; ?></td>
+                                            <td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
+                                            <td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
+                                            <td><?php echo $row['Fare']; ?>TK</td>
+                                            <td><?php echo TimeHelper::getFormattedTime($row['StartJourneyTime']); ?></td>
+                                            <td><?php echo TimeHelper::getFormattedTime($row['DepartureTime']); ?></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-info" href="booking_confirm.php?id=<?php echo $row['id']; ?>">Book</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</center>
+
+</main>
 <?php include_once "inc/footer.php"; ?>
