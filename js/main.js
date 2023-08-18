@@ -163,5 +163,77 @@ $(document).ready(function () {
 	hideCardHeader();
 
 
+//FliterByDateApi
+
+$('#inlineFormInputName2').change(function () {
+
+	var selectedFromValue = $(this).val();
+	console.log(selectedFromValue);
+	$.ajax({
+		url: 'FliterByDateApi.php',
+		method: 'GET',
+		data: {
+			date: selectedFromValue,
+		},
+		dataType: 'json', // Assuming your PHP script returns JSON data
+		success: function (data) {
+			console.log(data);
+			var routeTableBody = $('#routeTableBody');
+			routeTableBody.empty(); // Clear existing rows
+
+			$.each(data, function (index, row) {
+				var newRow = $('<tr>');
+				console.log(row.locationId_From);
+				newRow.append($('<td>').text(index + 1));
+				newRow.append($('<td>').text(row.fromLocationName));
+				newRow.append($('<td>').text(row.ToLocationName));
+				newRow.append($('<td>').text(row.fare + ' TK'));
+				newRow.append($('<td>').text(row.StartJourneyTime));
+				newRow.append($('<td>').text(row.DepartureTime));
+				newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+				routeTableBody.append(newRow);
+			});
+		},
+		error: function (xhr, status, error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+});
+
+
+
+$('#CheckAvailable').submit(function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+    var selectedFromValue = $('#inlineFormInputName2').val();
+    
+    $.ajax({
+        url: 'FliterByDateApi.php',
+        method: 'GET',
+        data: {
+            date: selectedFromValue,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var routeTableBody = $('#routeTableBody');
+            routeTableBody.empty();
+
+            $.each(data, function (index, row) {
+                var newRow = $('<tr>');
+                newRow.append($('<td>').text(index + 1));
+                newRow.append($('<td>').text(row.fromLocationName));
+                newRow.append($('<td>').text(row.ToLocationName));
+                newRow.append($('<td>').text(row.fare + ' TK'));
+                newRow.append($('<td>').text(row.StartJourneyTime));
+                newRow.append($('<td>').text(row.DepartureTime));
+                newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+                routeTableBody.append(newRow);
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+});
 
 })

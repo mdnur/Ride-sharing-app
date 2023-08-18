@@ -97,6 +97,23 @@ class RouteTable extends MainTable
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+
+    public function readAllByDate($date)
+    {
+        $sql = "SELECT r.fare ,r.StartJourneyTime,r.DepartureTime, lf.name AS fromLocationName,
+                lt.name AS toLocationName
+                FROM route r
+                JOIN location lf ON r.locationId_From = lf.id
+                JOIN location lt ON r.locationId_To = lt.id
+                WHERE DATE(r.StartJourneyTime) >= :date
+                AND r.status = 0 
+                ORDER BY r.id DESC";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":date", $date);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function getDriverIncomeByMonth($driverID, $month, $year)
     {
         $sql = "SELECT SUM(driverPayment) AS totalPayment
