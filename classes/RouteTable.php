@@ -81,16 +81,25 @@ class RouteTable extends MainTable
     }
     public function readAllByFromAndTo($from, $to)
     {
-        $sql = "SELECT r.fare ,r.StartJourneyTime,r.DepartureTime, lf.name AS fromLocationName,
-                lt.name AS toLocationName
-                FROM route r
-                JOIN location lf ON r.locationId_From = lf.id
-                JOIN location lt ON r.locationId_To = lt.id
-                WHERE r.locationId_From = :from
-                AND r.locationId_To = :to
-                AND DATE(r.StartJourneyTime) >= CURDATE() 
-                AND r.status = 0 
-                ORDER BY r.id DESC";
+        $sql = "SELECT r.id,r.fare,
+            r.StartJourneyTime,
+            r.DepartureTime,
+            lf.name AS fromLocationName,
+            lt.name AS toLocationName,
+            (v.capacity - IFNULL(ur.total_bookings, 0)) AS available_seats
+            FROM route r
+            JOIN location lf ON r.locationId_From = lf.id
+            JOIN location lt ON r.locationId_To = lt.id
+            JOIN vehicle v ON r.vehicleID = v.id
+            LEFT JOIN (
+            SELECT rideBookID, COUNT(*) AS total_bookings
+            FROM userRideBook
+            GROUP BY rideBookID
+            ) ur ON r.id = ur.rideBookID
+            WHERE r.locationId_From = :from   AND r.locationId_To = :to And DATE(r.StartJourneyTime) >= CURDATE() 
+            AND r.status = 0
+            ORDER BY r.id DESC;";
+
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":from", $from);
         $stmt->bindParam(":to", $to);
@@ -101,14 +110,24 @@ class RouteTable extends MainTable
 
     public function readAllByDate($date)
     {
-        $sql = "SELECT r.fare ,r.StartJourneyTime,r.DepartureTime, lf.name AS fromLocationName,
-                lt.name AS toLocationName
+        $sql = "SELECT r.fare,
+                    r.StartJourneyTime,
+                    r.DepartureTime,
+                    lf.name AS fromLocationName,
+                    lt.name AS toLocationName,
+                    (v.capacity - IFNULL(ur.total_bookings, 0)) AS available_seats
                 FROM route r
                 JOIN location lf ON r.locationId_From = lf.id
                 JOIN location lt ON r.locationId_To = lt.id
+                JOIN vehicle v ON r.vehicleID = v.id
+                LEFT JOIN (
+                    SELECT rideBookID, COUNT(*) AS total_bookings
+                    FROM userRideBook
+                    GROUP BY rideBookID
+                ) ur ON r.id = ur.rideBookID
                 WHERE DATE(r.StartJourneyTime) >= :date
-                AND r.status = 0 
-                ORDER BY r.id DESC";
+                AND r.status = 0
+            ORDER BY r.id DESC;";
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":date", $date);
         $stmt->execute();

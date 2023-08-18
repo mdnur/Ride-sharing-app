@@ -105,57 +105,58 @@ $(document).ready(function () {
 
 
 	$('#CheckAvailable').submit(function (event) {
-        event.preventDefault();
+		event.preventDefault();
 
-        var selectedFromValue = $('#fromSelect').val();
-        var selectedToValue = $('#toSelect').val();
+		var selectedFromValue = $('#fromSelect').val();
+		var selectedToValue = $('#toSelect').val();
 
-        $.ajax({
-            url: 'filter_routesApi.php',
-            method: 'GET',
-            data: {
-                from: selectedFromValue,
-                to: selectedToValue
-            },
-            dataType: 'json', // Assuming your PHP script returns JSON data
-            success: function (data) {
-				if(data.length == 0){
+		$.ajax({
+			url: 'filter_routesApi.php',
+			method: 'GET',
+			data: {
+				from: selectedFromValue,
+				to: selectedToValue
+			},
+			dataType: 'json', // Assuming your PHP script returns JSON data
+			success: function (data) {
+				if (data.length == 0) {
 					$("#tableC").hide();
 					alert("No route Available");
 					return;
 				}
 
 				$("#tableC").show();
-                var routeTableBody = $('#routeTableBody');
-                routeTableBody.empty(); // Clear existing rows
+				var routeTableBody = $('#routeTableBody');
+				routeTableBody.empty(); // Clear existing rows
 
-                $.each(data, function (index, row) {
-                    var newRow = $('<tr>');
+				$.each(data, function (index, row) {
+					var newRow = $('<tr>');
 					console.log(row.locationId_From);
-                    newRow.append($('<td>').text(index + 1));
-                    newRow.append($('<td>').text(row.fromLocationName));
-                    newRow.append($('<td>').text(row.ToLocationName));
-                    newRow.append($('<td>').text(row.fare + ' TK'));
-                    newRow.append($('<td>').text(row.StartJourneyTime));
-                    newRow.append($('<td>').text(row.DepartureTime));
-                    newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
-                    routeTableBody.append(newRow);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error('Error fetching data:', error);
+					newRow.append($('<td>').text(index + 1));
+					newRow.append($('<td>').text(row.fromLocationName));
+					newRow.append($('<td>').text(row.toLocationName));
+					newRow.append($('<td>').text(row.available_seats));
+					newRow.append($('<td>').text(row.fare + ' TK'));
+					newRow.append($('<td>').text(row.StartJourneyTime));
+					newRow.append($('<td>').text(row.DepartureTime));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					routeTableBody.append(newRow);
+				});
+			},
+			error: function (xhr, status, error) {
+				console.error('Error fetching data:', error);
 				$("#tableC").hide();
-            }
-        });
-    });
+			}
+		});
+	});
 
 	// $('#tableC').onload(function (event) {	
 	// 	$('#tableC').hide();
 	// });
 
 
-	 // Function to hide the card header
-	 function hideCardHeader() {
+	// Function to hide the card header
+	function hideCardHeader() {
 		$("#tableC").hide();
 	}
 
@@ -163,77 +164,78 @@ $(document).ready(function () {
 	hideCardHeader();
 
 
-//FliterByDateApi
+	//FliterByDateApi
 
-$('#inlineFormInputName2').change(function () {
+	$('#inlineFormInputName2').change(function () {
 
-	var selectedFromValue = $(this).val();
-	console.log(selectedFromValue);
-	$.ajax({
-		url: 'FliterByDateApi.php',
-		method: 'GET',
-		data: {
-			date: selectedFromValue,
-		},
-		dataType: 'json', // Assuming your PHP script returns JSON data
-		success: function (data) {
-			console.log(data);
-			var routeTableBody = $('#routeTableBody');
-			routeTableBody.empty(); // Clear existing rows
+		var selectedFromValue = $(this).val();
+		console.log(selectedFromValue);
+		$.ajax({
+			url: 'FliterByDateApi.php',
+			method: 'GET',
+			data: {
+				date: selectedFromValue,
+			},
+			dataType: 'json', // Assuming your PHP script returns JSON data
+			success: function (data) {
+				console.log(data);
+				var routeTableBody = $('#routeTableBody');
+				routeTableBody.empty(); // Clear existing rows
 
-			$.each(data, function (index, row) {
-				var newRow = $('<tr>');
-				console.log(row.locationId_From);
-				newRow.append($('<td>').text(index + 1));
-				newRow.append($('<td>').text(row.fromLocationName));
-				newRow.append($('<td>').text(row.ToLocationName));
-				newRow.append($('<td>').text(row.fare + ' TK'));
-				newRow.append($('<td>').text(row.StartJourneyTime));
-				newRow.append($('<td>').text(row.DepartureTime));
-				newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
-				routeTableBody.append(newRow);
-			});
-		},
-		error: function (xhr, status, error) {
-			console.error('Error fetching data:', error);
-		}
+				$.each(data, function (index, row) {
+					var newRow = $('<tr>');
+					console.log(row.locationId_From);
+					newRow.append($('<td>').text(index + 1));
+					newRow.append($('<td>').text(row.fromLocationName));
+					newRow.append($('<td>').text(row.toLocationName));
+					newRow.append($('<td>').text(row.available_seats));
+					newRow.append($('<td>').text(row.fare + ' TK'));
+					newRow.append($('<td>').text(row.StartJourneyTime));
+					newRow.append($('<td>').text(row.DepartureTime));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					routeTableBody.append(newRow);
+				});
+			},
+			error: function (xhr, status, error) {
+				console.error('Error fetching data:', error);
+			}
+		});
 	});
-});
 
 
 
-$('#CheckAvailable').submit(function (event) {
-    event.preventDefault(); // Prevent the default form submission
-    
-    var selectedFromValue = $('#inlineFormInputName2').val();
-    
-    $.ajax({
-        url: 'FliterByDateApi.php',
-        method: 'GET',
-        data: {
-            date: selectedFromValue,
-        },
-        dataType: 'json',
-        success: function (data) {
-            var routeTableBody = $('#routeTableBody');
-            routeTableBody.empty();
+	$('#CheckAvailable').submit(function (event) {
+		event.preventDefault(); // Prevent the default form submission
 
-            $.each(data, function (index, row) {
-                var newRow = $('<tr>');
-                newRow.append($('<td>').text(index + 1));
-                newRow.append($('<td>').text(row.fromLocationName));
-                newRow.append($('<td>').text(row.ToLocationName));
-                newRow.append($('<td>').text(row.fare + ' TK'));
-                newRow.append($('<td>').text(row.StartJourneyTime));
-                newRow.append($('<td>').text(row.DepartureTime));
-                newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
-                routeTableBody.append(newRow);
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching data:', error);
-        }
-    });
-});
+		var selectedFromValue = $('#inlineFormInputName2').val();
+
+		$.ajax({
+			url: 'FliterByDateApi.php',
+			method: 'GET',
+			data: {
+				date: selectedFromValue,
+			},
+			dataType: 'json',
+			success: function (data) {
+				var routeTableBody = $('#routeTableBody');
+				routeTableBody.empty();
+
+				$.each(data, function (index, row) {
+					var newRow = $('<tr>');
+					newRow.append($('<td>').text(index + 1));
+					newRow.append($('<td>').text(row.fromLocationName));
+					newRow.append($('<td>').text(row.ToLocationName));
+					newRow.append($('<td>').text(row.fare + ' TK'));
+					newRow.append($('<td>').text(row.StartJourneyTime));
+					newRow.append($('<td>').text(row.DepartureTime));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					routeTableBody.append(newRow);
+				});
+			},
+			error: function (xhr, status, error) {
+				console.error('Error fetching data:', error);
+			}
+		});
+	});
 
 })

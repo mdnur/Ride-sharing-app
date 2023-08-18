@@ -91,6 +91,7 @@ $results = $route->getRouteByFieldNameAndDateAndFromToday('status', "0",date('Y-
                                         <th>No</th>
                                         <th>From </th>
                                         <th>To</th>
+                                        <th>Seat</th>
                                         <th>Fare</th>
                                         <th>Start at</th>
                                         <th>Ends at</th>
