@@ -9,6 +9,12 @@ $results = $route->getRouteByFieldNameAndDateAndFromToday('status', "0", date('Y
 
 $locations = new LocationTable();
 
+
+$userRideBooking = new UserRideBookTable();
+
+
+$vehicle = new VehicleTable();
+
 ?>
 <main class="py-4 ">
     <div class="container">
@@ -50,6 +56,7 @@ $locations = new LocationTable();
                                         <th>No</th>
                                         <th>From </th>
                                         <th>To</th>
+                                        <th>Seat</th>
                                         <th>Fare</th>
                                         <th>Start at</th>
                                         <th>Ends at</th>
@@ -63,6 +70,7 @@ $locations = new LocationTable();
                                             <td><?php echo $count++; ?></td>
                                             <td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
                                             <td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
+                                            <td><?php echo $vehicle->readByid($row['vehicleID'])['capacity'] - $userRideBooking->countRideBooking($row['id'])['total'] ?></td>
                                             <td><?php echo $row['Fare']; ?>TK</td>
                                             <td><?php echo TimeHelper::getFormattedTime($row['StartJourneyTime']); ?></td>
                                             <td><?php echo TimeHelper::getFormattedTime($row['DepartureTime']); ?></td>
