@@ -75,4 +75,11 @@ class UserRideBookTable extends MainTable
                 break;
         }
     }
+    public function countRideBooking($route){
+        $sql = "SELECT COUNT(*) AS total FROM userRideBook WHERE rideBookID = :route";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":route", $route);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }

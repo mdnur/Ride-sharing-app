@@ -54,6 +54,20 @@ use lib\Session;
         </li>
       <?php } ?>
       <?php if (Session::ifLogin()) { ?>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Credit
+          </a>
+          <?php $credit = new CreditTable(); $credit =$credit->getRemainingCredit(Session::get('rider')['id'])?>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item disabled" >Remain:<?php echo( $credit['remaining_credit']);?></a>
+            <a class="dropdown-item" href="add_credit.php">Add Credit</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="home.php?action=logout">Logout</a>
+          </div>
+        </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php echo Session::get('rider')['name'] ?>

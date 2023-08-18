@@ -33,8 +33,11 @@ spl_autoload_register(function ($class) {
     <link href="/../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://scripts.sandbox.bka.sh/versions/1.1.0-beta/checkout/bKash-checkout-sandbox.js"></script>
     <!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
 </head>
 
 <body>

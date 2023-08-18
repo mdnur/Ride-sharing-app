@@ -63,34 +63,7 @@ $rider = $rider->readByid($userID);
                             <a role="button"  href="home.php" class="btn btn-primary">Edit </a>
 
                         </form>
-                        <center>
-                            <div class="login">
-                                <form id="login" method="post" action="">
-                                    <label for="name"><b>Name
-                                        </b>
-                                    </label>
-                                    <input type="text"  id="name" name="name" value="<?php echo $rider['name'] ?>">
-                                    <br><br>
-                                    <label for="username"><b>Username
-                                        </b>
-                                    </label>
-                                    <input type="text"  id="username" name="username" value="<?php echo $rider['username'] ?>">
-                                    <br><br>
-                                    <label for="email"><b>Email
-                                        </b>
-                                    </label>
-                                    <input type="email"  id="email" name="email" value="<?php echo $rider['email'] ?>">
-                                    <br><br>
-                                    <label for="phone"><b>phone
-                                        </b>
-                                    </label><!--pattern="^01[3456789]\d{8}$"-->
-                                    <input type="text" id="phone" name="phone" value="<?php echo $rider['phone'] ?>"   title="Bangladesh phone number: 01XXXXXXXXX">
-                                    <br><br>
-
-                                    <a href="index.php">Home </a>
-                                </form>
-                            </div>
-                        </center>
+                       
                     </div>
                 </div>
             </div>
