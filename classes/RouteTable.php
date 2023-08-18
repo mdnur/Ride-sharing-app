@@ -110,7 +110,7 @@ class RouteTable extends MainTable
 
     public function readAllByDate($date)
     {
-        $sql = "SELECT r.fare,
+        $sql = "SELECT r.id,r.fare,
                     r.StartJourneyTime,
                     r.DepartureTime,
                     lf.name AS fromLocationName,

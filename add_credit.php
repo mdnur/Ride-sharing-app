@@ -5,19 +5,7 @@ include_once "inc/header.php";
 use lib\Session;
 
 ?>
-<?php
 
-
-if (isset($_POST['log'])) {
-}
-$userID = (Session::get('rider')['id']);
-
-
-$rider = new RiderTable();
-$rider = $rider->readByid($userID);
-
-
-?>
 <main class="py-4 ">
     <div class="container">
         <div class="row justify-content-center">

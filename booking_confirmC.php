@@ -19,12 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'created_at' => date('Y-m-d H:i:s'),
         ];
         $expense = new ExpenseTable();
-        $bool = $expense->insert($data);
+        // $bool = $expense->insert($data);
+        $bool =true;
         
         if ($bool) {
             unset($_POST['expense_amount']);
             $userRideBook = new UserRideBookTable();
-            $bool1 = $userRideBook->insert($_POST);
+            // $bool1 = $userRideBook->insert($_POST);
+            $bool1 = true;
             if ($bool1) {
                 header("Location: current_booking.php");
             } else {
