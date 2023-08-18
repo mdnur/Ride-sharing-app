@@ -238,4 +238,109 @@ $(document).ready(function () {
 		});
 	});
 
+
+
+
+
+
+	// Status
+
+	$('#inlineFormInputName4').change(function () {
+
+		var selectedFromValue = $(this).val();
+		console.log(selectedFromValue);
+		$.ajax({
+			url: 'FilterByStatus.php',
+			method: 'GET',
+			data: {
+				status: selectedFromValue,
+			},
+			dataType: 'json', // Assuming your PHP script returns JSON data
+			success: function (data) {
+				console.log(data);
+				var routeTableBody = $('#StatusAndDate');
+				routeTableBody.empty(); // Clear existing rows
+
+				$.each(data, function (index, row) {
+					var newRow = $('<tr>');
+					console.log(row.locationId_From);
+					newRow.append($('<td>').text(index + 1));
+					newRow.append($('<td>').text(row.driverName));
+					newRow.append($('<td>').text(row.pickUpLocation));
+					newRow.append($('<td>').text(row.dropLocation));
+					newRow.append($('<td>').text(row.StartJourneyTime));
+					newRow.append($('<td>').text(row.rideFare));
+
+
+					if (row.rideStatus == 2) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-success'>Completed</span>"));
+					} else if (row.rideStatus == 0) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-primary'>Active</span>"));
+					} else if (row.rideStatus == 3) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-danger'>Canceled</span>"));
+					} else if (row.rideStatus == 1) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-info'>Processing</span>"));
+					}
+					// routeTableBody.append(newRow);
+					// newRow.append($('<td>').text(row.rideStatus));
+					// newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					routeTableBody.append(newRow);
+				});
+			},
+			error: function (xhr, status, error) {
+				console.error('Error fetching data:', error);
+			}
+		});
+	});
+
+
+	// Date
+
+
+	$('#inlineFormInputName3').change(function () {
+
+		var selectedFromValue = $(this).val();
+		console.log(selectedFromValue);
+		$.ajax({
+			url: 'FilterByDate.php',
+			method: 'GET',
+			data: {
+				date: selectedFromValue,
+			},
+			dataType: 'json', // Assuming your PHP script returns JSON data
+			success: function (data) {
+				console.log(data);
+				var routeTableBody = $('#StatusAndDate');
+				routeTableBody.empty(); // Clear existing rows
+
+				$.each(data, function (index, row) {
+					var newRow = $('<tr>');
+					console.log(row.locationId_From);
+					newRow.append($('<td>').text(index + 1));
+					newRow.append($('<td>').text(row.driverName));
+					newRow.append($('<td>').text(row.pickUpLocation));
+					newRow.append($('<td>').text(row.dropLocation));
+					newRow.append($('<td>').text(row.StartJourneyTime));
+					newRow.append($('<td>').text(row.rideFare));
+
+
+					if (row.rideStatus == 2) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-success'>Completed</span>"));
+					} else if (row.rideStatus == 0) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-primary'>Active</span>"));
+					} else if (row.rideStatus == 3) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-danger'>Canceled</span>"));
+					} else if (row.rideStatus == 1) {
+						newRow.append($('<td>').html("<span class='badge badge-pill badge-info'>Processing</span>"));
+					}
+					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					routeTableBody.append(newRow);
+				});
+			},
+			error: function (xhr, status, error) {
+				console.error('Error fetching data:', error);
+			}
+		});
+	});
 })

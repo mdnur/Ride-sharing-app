@@ -25,25 +25,33 @@ $results = $route->getRideBookByRiderId(1);
                 <div class="card">
                     <div class="card-header justify-content-between d-flex">
                         <div class="">
-                            <h5 class="mt-10">My Route Booking</h5>
+                            <h5 class="mt-10">My Booking History</h5>
                         </div>
                         <div>
                             <form>
                                 <div class="form-row align-items-center">
-                                    <div class="col-auto ">
+                                    <!-- <div class="col-auto ">
                                         <label class="sr-only" for="inlineFormInputName2">Name</label>
-                                        <input type="text" class="form-control " id="inlineFormInputName2" placeholder="search ...">
-
-                                    </div>
+                                        <input type="text" class="form-control " id="inlineFormInputName2">
+                                    </div> -->
                                     <div class="col-auto ">
-                                        <label class="sr-only" for="inlineFormInputName2">Name</label>
-                                        <select class="form-control " id="inlineFormInputName2" placeholder="search ...">
+                                        <label class="sr-only" for="inlineFormInputName3">Name</label>
+                                        <select class="form-control " id="inlineFormInputName3">
+                                            <option value="All">All</option>
                                             <option value="Today">Today</option>
                                             <option value="Tomorrow">Tomorrow</option>
                                         </select>
                                     </div>
                                     <div class="col-auto ">
-                                        <button type="submit" class="btn btn-primary">Search</button>
+                                        <label class="sr-only" for="inlineFormInputName4">Status</label>
+                                        <select class="form-control " id="inlineFormInputName4">
+                                            <option value="4">All</option>
+                                            <option value="0">Active</option>
+                                            <option value="1">Processing</option>
+                                            <option value="2">Completed</option>
+                                            <option value="3">Canceled</option>
+
+                                        </select>
                                     </div>
                                 </div>
                             </form>
@@ -66,7 +74,7 @@ $results = $route->getRideBookByRiderId(1);
                                     </tr>
                                 </thead>
                                 <?php $count = 1; ?>
-                                <tbody>
+                                <tbody id="StatusAndDate">
                                     <?php foreach ($results as $row) { ?>
                                         <tr>
                                             <td><?php echo $count++; ?></td>

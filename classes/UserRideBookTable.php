@@ -58,6 +58,44 @@ class UserRideBookTable extends MainTable
         // return $stmt->rowCount();//PDO::FETCH_OBJ
     }
 
+
+    public function getRideBookByRiderIdAndDate($riderId,$date)
+    {
+        $sql = "SELECT urb.id AS rideBookID, urb.riderID, urb.pickUpId, urb.dropId,
+        p.name AS pickUpLocation, d.name AS dropLocation,
+        dr.name AS driverName, r.status AS rideStatus,
+        r.Fare AS rideFare, r.StartJourneyTime
+        FROM userRideBook urb
+        JOIN SubLocation p ON urb.pickUpId = p.id
+        JOIN SubLocation d ON urb.dropId = d.id
+        JOIN route r ON urb.rideBookID = r.id
+        JOIN driver dr ON r.driverID = dr.id
+        WHERE urb.riderID = :riderID and DATE(r.StartJourneyTime) = :dates ORDER BY r.StartJourneyTime DESC;";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":riderID", $riderId);
+        $stmt->bindParam(":dates", $date);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount();//PDO::FETCH_OBJ
+    }
+
+    public function getRiderBookByRiderIdAndStatus($riderId,$status){
+        $sql = "SELECT urb.id AS rideBookID, urb.riderID, urb.pickUpId, urb.dropId,
+        p.name AS pickUpLocation, d.name AS dropLocation,
+        dr.name AS driverName, r.status AS rideStatus,
+        r.Fare AS rideFare, r.StartJourneyTime
+        FROM userRideBook urb
+        JOIN SubLocation p ON urb.pickUpId = p.id
+        JOIN SubLocation d ON urb.dropId = d.id
+        JOIN route r ON urb.rideBookID = r.id
+        JOIN driver dr ON r.driverID = dr.id
+        WHERE urb.riderID = :riderID AND r.status= :status1  ORDER BY r.StartJourneyTime DESC;";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":riderID", $riderId);
+        $stmt->bindParam(":status1", $status);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function getStatus($status)
     {
         switch ($status) {
