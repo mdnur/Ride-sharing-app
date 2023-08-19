@@ -60,7 +60,7 @@ $rider = $rider->readByid($userID);
                                 </div>
                             </div>
                             <a role="button"  href="home.php" class="btn btn-primary">Back </a>
-                            <a role="button"  href="home.php" class="btn btn-primary">Edit </a>
+                            <a role="button"  href="edit_profile.php" class="btn btn-primary">Edit </a>
 
                         </form>
                        

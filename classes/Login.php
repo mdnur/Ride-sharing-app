@@ -104,4 +104,25 @@ class Login
         Validation::getRiderByFieldName('phone',$post['phone']);
         return $this;
     }
+    public function changePassword($old_password,$new_password,$confirm_password){
+        $rider = new RiderTable();
+        $riderInfo =$rider->readByid(Session::get('rider')['id']);
+        if($riderInfo['password'] != $old_password){
+            Session::set("flash_message_info", "Old Password is incorrect");
+            return false;
+        }
+        
+        Validation::required($old_password,'old_password');
+        Validation::required($new_password,'password');
+        Validation::required($confirm_password,'confirm_password');
+        Validation::confirm_password($new_password,$confirm_password);
+
+        $data = [
+            'password' => $new_password
+        ];
+        if($rider->update($data,Session::get('rider')['id'])){
+            Session::set("flash_message_success", "Password Changed Successfully");
+            return true;
+        }
+    }
 }

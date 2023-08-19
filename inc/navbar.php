@@ -74,7 +74,8 @@ use lib\Session;
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="profile.php">My Profile</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="edit_profile.php">Edit Profile</a>
+            <a class="dropdown-item" href="change_password.php">Change Password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="home.php?action=logout">Logout</a>
           </div>
