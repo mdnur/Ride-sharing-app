@@ -44,38 +44,43 @@ $locations = new LocationTable();
 				<span class="text-justify">TransitWise</span>
 			</div>
 			<div class="col-lg-8 col-md-8 col-sm-12 desc">
-
-				<div class="table-responsive">
-					<table class="table table-bordered" width="100%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>From </th>
-								<th>To</th>
-								<th>Fare</th>
-								<th>Start at</th>
-								<th>Ends at</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<?php $count = 1; ?>
-						<tbody>
-							<?php foreach ($results as $row) { ?>
+				<?php if (sizeof($results) != 0) { ?>
+					<div class="table-responsive">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+							<thead>
 								<tr>
-									<td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
-									<td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
-									<td><?php echo $row['Fare']; ?>TK</td>
-									<td><?php echo TimeHelper::getFormattedTime($row['StartJourneyTime']); ?></td>
-									<td><?php echo TimeHelper::getFormattedTime($row['DepartureTime']); ?></td>
-									<td>
-										<div class="btn-group">
-											<a class="btn btn-info" href="booking_confirm.php?id=<?php echo $row['id']; ?>">Book</a>
-										</div>
-									</td>
+									<th>From </th>
+									<th>To</th>
+									<th>Fare</th>
+									<th>Start at</th>
+									<th>Ends at</th>
+									<th>Action</th>
 								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<?php $count = 1; ?>
+							<tbody>
+								<?php foreach ($results as $row) { ?>
+									<tr>
+										<td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
+										<td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
+										<td><?php echo $row['Fare']; ?>TK</td>
+										<td><?php echo TimeHelper::getFormattedTime($row['StartJourneyTime']); ?></td>
+										<td><?php echo TimeHelper::getFormattedTime($row['DepartureTime']); ?></td>
+										<td>
+											<div class="btn-group">
+												<a class="btn btn-info" href="booking_confirm.php?id=<?php echo $row['id']; ?>">Book</a>
+											</div>
+										</td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				<?php } else { ?>
+					<div class="alert alert-info" role="alert">
+						No Nearby Route Available Currently
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

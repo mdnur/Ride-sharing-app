@@ -6,7 +6,7 @@ use lib\Session;
 
 $route = new RouteTable();
 $results = $route->getRouteByFieldNameAndDateAndFromToday('status', "0", date('Y-m-d'));
-
+// print_r();
 $locations = new LocationTable();
 
 
@@ -49,6 +49,7 @@ $vehicle = new VehicleTable();
                     </div>
 
                     <div class="card-body">
+                        <?php if(sizeof($results) != 0){?>
                         <div class="table-responsive">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
@@ -68,8 +69,8 @@ $vehicle = new VehicleTable();
                                     <?php foreach ($results as $row) { ?>
                                         <tr>
                                             <td><?php echo $count++; ?></td>
-                                            <td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
-                                            <td><?php echo ($locations->readByid($row['locationId_To']))['name'] ?></td>
+                                            <td><?php echo($locations->readByid($row['locationId_From']))['name'] ?></td>
+                                            <td><?php echo($locations->readByid($row['locationId_To']))['name'] ?></td>
                                             <td><?php echo $vehicle->readByid($row['vehicleID'])['capacity'] - $userRideBooking->countRideBooking($row['id'])['total'] ?></td>
                                             <td><?php echo $row['Fare']; ?>TK</td>
                                             <td><?php echo TimeHelper::getFormattedTime($row['StartJourneyTime']); ?></td>
@@ -84,6 +85,11 @@ $vehicle = new VehicleTable();
                                 </tbody>
                             </table>
                         </div>
+                        <?php }else{?>
+                        <div class="alert alert-info" role="alert">
+                            No Route Available Currently
+                        </div>
+                        <?php }?>
                     </div>
                 </div>
             </div>

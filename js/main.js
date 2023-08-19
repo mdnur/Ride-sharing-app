@@ -178,7 +178,24 @@ $(document).ready(function () {
 			},
 			dataType: 'json', // Assuming your PHP script returns JSON data
 			success: function (data) {
+
+				alert("No route Available");
 				console.log(data);
+				// if (data.length == 0) {
+				// 	alert("No route Available");	
+				// 	$(".table-responsive").hide();
+				// 	var card = $('.card-body');
+				// 	// alert("No Booking Found");
+				// 	if (card.find('.alert.alert-info').length === 0) {
+				// 		card.append($('<div class="alert alert-info" role="alert">No Booking History </div>'));
+				// 	}
+
+				// 	return;
+				// } else {
+				// 	$(".table-responsive").show();
+				// 	$(".alert").remove();
+
+				// }
 				var routeTableBody = $('#routeTableBody');
 				routeTableBody.empty(); // Clear existing rows
 
@@ -248,7 +265,7 @@ $(document).ready(function () {
 	$('#inlineFormInputName4').change(function () {
 
 		var selectedFromValue = $(this).val();
-		console.log(selectedFromValue);
+		// console.log(selectedFromValue);
 		$.ajax({
 			url: 'FilterByStatus.php',
 			method: 'GET',
@@ -258,6 +275,20 @@ $(document).ready(function () {
 			dataType: 'json', // Assuming your PHP script returns JSON data
 			success: function (data) {
 				console.log(data);
+				if (data.length == 0) {
+					$(".table-responsive").hide();
+					var card = $('.card-body');
+					// alert("No Booking Found");
+					if (card.find('.alert.alert-info').length === 0) {
+						card.append($('<div class="alert alert-info" role="alert">No Booking History </div>'));
+					}
+
+					return;
+				} else {
+					$(".table-responsive").show();
+					$(".alert").remove();
+
+				}
 				var routeTableBody = $('#StatusAndDate');
 				routeTableBody.empty(); // Clear existing rows
 
@@ -270,7 +301,6 @@ $(document).ready(function () {
 					newRow.append($('<td>').text(row.dropLocation));
 					newRow.append($('<td>').text(row.StartJourneyTime));
 					newRow.append($('<td>').text(row.rideFare));
-
 
 					if (row.rideStatus == 2) {
 						newRow.append($('<td>').html("<span class='badge badge-pill badge-success'>Completed</span>"));
@@ -311,6 +341,21 @@ $(document).ready(function () {
 			dataType: 'json', // Assuming your PHP script returns JSON data
 			success: function (data) {
 				console.log(data);
+				console.log(data);
+				if (data.length == 0) {
+					$(".table-responsive").hide();
+					var card = $('.card-body');
+					// alert("No Booking Found");
+					if (card.find('.alert.alert-info').length === 0) {
+						card.append($('<div class="alert alert-info" role="alert">No Booking History </div>'));
+					}
+
+					return;
+				} else {
+					$(".table-responsive").show();
+					$(".alert").remove();
+
+				}
 				var routeTableBody = $('#StatusAndDate');
 				routeTableBody.empty(); // Clear existing rows
 
