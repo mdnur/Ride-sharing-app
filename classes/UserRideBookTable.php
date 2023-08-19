@@ -59,7 +59,7 @@ class UserRideBookTable extends MainTable
     }
 
 
-    public function getRideBookByRiderIdAndDate($riderId,$date)
+    public function getRideBookByRiderIdAndDate($riderId, $date)
     {
         $sql = "SELECT urb.id AS rideBookID, urb.riderID, urb.pickUpId, urb.dropId,
         p.name AS pickUpLocation, d.name AS dropLocation,
@@ -79,7 +79,8 @@ class UserRideBookTable extends MainTable
         // return $stmt->rowCount();//PDO::FETCH_OBJ
     }
 
-    public function getRiderBookByRiderIdAndStatus($riderId,$status){
+    public function getRiderBookByRiderIdAndStatus($riderId, $status)
+    {
         $sql = "SELECT urb.id AS rideBookID, urb.riderID, urb.pickUpId, urb.dropId,
         p.name AS pickUpLocation, d.name AS dropLocation,
         dr.name AS driverName, r.status AS rideStatus,
@@ -113,11 +114,64 @@ class UserRideBookTable extends MainTable
                 break;
         }
     }
-    public function countRideBooking($route){
+    public function countRideBooking($route)
+    {
         $sql = "SELECT COUNT(*) AS total FROM userRideBook WHERE rideBookID = :route";
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":route", $route);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function userRideBookWithRoute($userRideID)
+    {
+        $sql = "SELECT urb.id AS ride_book_id,
+                r.id AS route_id,
+                r.driverID,
+                d.name AS driver_name,
+                d.phone AS driver_phone,
+                r.vehicleID,
+                r.locationId_From,
+                lf.name AS from_location_name,
+                r.locationId_To,
+                lt.name AS to_location_name,
+                r.Fare,
+                r.StartJourneyTime,
+                r.DepartureTime,
+                r.driverPayment,
+                r.createdbyID,
+                r.created_at AS route_created_at,
+                r.status AS route_status,
+                s_pick.name AS pick_up_location_name,
+                s_drop.name AS drop_location_name,
+                rb.riderID AS rider_id,
+                rb.pickUpId AS pick_up_id,
+                rb.dropId AS drop_id,
+                rb.created_at AS ride_book_created_at
+                FROM userRideBook rb
+                JOIN route r ON rb.rideBookID = r.id
+                JOIN subLocation s_pick ON rb.pickUpId = s_pick.id
+                JOIN subLocation s_drop ON rb.dropId = s_drop.id
+                JOIN location lf ON r.locationId_From = lf.id
+                JOIN location lt ON r.locationId_To = lt.id
+                JOIN userRideBook urb ON rb.id = urb.id
+                JOIN driver d ON r.driverID = d.id WHERE rb.id = :userRideID";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":userRideID", $userRideID);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function getStatusByName($id)
+    {
+        if ($id == 2) {
+            echo "Complete";
+        } else if ($id == 1) {
+            echo "Processing";
+        } else if ($id == 3) {
+            echo "Cancel";
+        } else if ($id == 0) {
+            echo "Active";
+        }
     }
 }

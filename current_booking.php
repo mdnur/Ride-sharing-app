@@ -110,7 +110,7 @@ $results = $route->getRideBookByRiderId(1);
                                                     <?php echo $route->getStatus($row['rideStatus']); ?></span></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-info" href="booking_confirm.php?id=<?php echo $row['rideBookID']; ?>">View</a>
+                                                    <a class="btn btn-info" href="view_booking.php?id=<?php echo $row['rideBookID']; ?>">View</a>
                                                     <?php if (TimeHelper::getTimeDiff($row['StartJourneyTime'])) { ?>
                                                         <a class="btn btn-danger" href="booking_confirm.php?id=<?php echo $row['rideBookID']; ?>">Cancel</a>
                                                     <?php } ?>

@@ -3,20 +3,6 @@
 
 use lib\Session;
 
-if (isset($_POST['log'])) {
-    $userID = (Session::get('rider')['id']);
-
-    unset($_POST['log']);
-    $_POST['riderID'] = $userID;
-    $data = $_POST;
-    $userRideBook = new UserRideBookTable();
-
-    if ($userRideBook->insert($data)) {
-        header("Location: index.php");
-    } else {
-        echo "Something went wrong";
-    }
-}
 $location = new SubLocationTable();
 
 $results = $location->readAll();

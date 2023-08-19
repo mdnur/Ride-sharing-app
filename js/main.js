@@ -284,7 +284,7 @@ $(document).ready(function () {
 					// routeTableBody.append(newRow);
 					// newRow.append($('<td>').text(row.rideStatus));
 					// newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
-					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="view_booking.php?id=' + row.rideBookID + '">View</a>'));
 					routeTableBody.append(newRow);
 				});
 			},
@@ -334,7 +334,7 @@ $(document).ready(function () {
 					} else if (row.rideStatus == 1) {
 						newRow.append($('<td>').html("<span class='badge badge-pill badge-info'>Processing</span>"));
 					}
-					newRow.append($('<td>').html('<a class="btn btn-info" href="booking_confirm.php?id=' + row.id + '">Book</a>'));
+					newRow.append($('<td>').html('<a class="btn btn-info" href="view_booking.php?id=' + row.rideBookID + '">View</a>'));
 					routeTableBody.append(newRow);
 				});
 			},
