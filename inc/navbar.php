@@ -1,6 +1,6 @@
 <?php
 require_once "lib/Session.php";
-
+require_once "driver/inc/spl_autoload.php";
 use lib\Session;
 
 ?>

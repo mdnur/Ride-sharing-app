@@ -112,11 +112,11 @@ use lib\Session;
 
 
                 <div class="col-lg-3 col-md-3 col-sm-12 item">
-                    <img src="images/T2.png" class="img-fluid" alt="team">
+                    <img src="images/T1.1.png" class="img-fluid" alt="team">
                     <div class="des">
-                        Nur Mohammad
+                        Jariatun Islam
                     </div>
-                    <span class="text-muted">Lead Developer</span>
+                    <span class="text-muted">Project Manager</span>
                 </div>
 
 
@@ -129,7 +129,7 @@ use lib\Session;
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-12 item">
-                    <img src="images/T2.png" class="img-fluid" alt="team">
+                    <img src="images/T3.png" class="img-fluid" alt="team">
                     <div class="des">
                         Sandip Misra
                     </div>

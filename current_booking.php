@@ -35,23 +35,34 @@ $results = $route->getRideBookByRiderId(1);
                                         <input type="text" class="form-control " id="inlineFormInputName2">
                                     </div> -->
                                     <div class="col-auto ">
-                                        <label class="sr-only" for="inlineFormInputName3">Name</label>
-                                        <select class="form-control " id="inlineFormInputName3">
-                                            <option value="All">All</option>
-                                            <option value="Today">Today</option>
-                                            <option value="Tomorrow">Tomorrow</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Date</label>
+                                            </div>
+                                            <label class="sr-only" for="inlineFormInputName3">Name</label>
+                                            <select class="form-control " id="inlineFormInputName3">
+                                                <option value="All">All</option>
+                                                <option value="Today">Today</option>
+                                                <option value="Tomorrow">Tomorrow</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-auto ">
-                                        <label class="sr-only" for="inlineFormInputName4">Status</label>
-                                        <select class="form-control " id="inlineFormInputName4">
-                                            <option value="4">All</option>
-                                            <option value="0">Active</option>
-                                            <option value="1">Processing</option>
-                                            <option value="2">Completed</option>
-                                            <option value="3">Canceled</option>
+                                    <div class="col-auto  ">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Status</label>
+                                            </div>
+                                            <label class="sr-only" for="inlineFormInputName4">Status</label>
+                                            <select class="form-control " id="inlineFormInputName4">
+                                                <option value="4">All</option>
+                                                <option value="0">Active</option>
+                                                <option value="1">Processing</option>
+                                                <option value="2">Completed</option>
+                                                <option value="3">Canceled</option>
 
-                                        </select>
+                                            </select>
+                                        </div>
+
                                     </div>
                                 </div>
                             </form>

@@ -8,10 +8,16 @@ use lib\Session;
 
 Session::CheckSession();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if($_POST['dropId'] == '' || $_POST['pickUpId'] == ''){
+        Session::set("flash_message", "Drop Location or Pick up Location not selected");
+        header("Location: booking_confirm.php?id=".$_POST['rideBookID']);
+        
+    }
     $user_id = Session::get('rider')['id'];
     if (isset($_POST['expense_amount'])) {
 
-        $_POST['user_id'] = $user_id;
+        $_POST['riderID'] = $user_id;
         $_POST['created_at'] = date('Y-m-d H:i:s');
         $data = [
             'user_id' => $user_id,
@@ -19,14 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'created_at' => date('Y-m-d H:i:s'),
         ];
         $expense = new ExpenseTable();
-        // $bool = $expense->insert($data);
-        $bool =true;
+        $bool = $expense->insert($data);
+        // $bool =true;
         
         if ($bool) {
             unset($_POST['expense_amount']);
             $userRideBook = new UserRideBookTable();
-            // $bool1 = $userRideBook->insert($_POST);
-            $bool1 = true;
+            $bool1 = $userRideBook->insert($_POST);
             if ($bool1) {
                 header("Location: current_booking.php");
             } else {

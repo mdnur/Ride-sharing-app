@@ -49,7 +49,16 @@ $drop = $location->getSubLocationByFieldName('locationID', $route['locationId_To
 
                     <div class="card-body">
                         <form id="CreditAmountAddingFrom" method="POST" action="booking_confirmC.php">
-                            <input type="text" value="<?php echo $route['id'];?>" name="rideBookID" hidden>
+                            <?php if (Session::get('flash_message')) { ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?php echo Session::get('flash_message'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php unset($_SESSION['flash_message']);
+                            } ?>
+                            <input type="text" value="<?php echo $route['id']; ?>" name="rideBookID" hidden>
                             <div class="form-group">
                                 <label for="From">From</label>
                                 <input type="text" class="form-control" id="From" value="<?php echo $from ?>" readonly>

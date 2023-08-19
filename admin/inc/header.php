@@ -20,14 +20,6 @@ use lib\Helper;
 Session::CheckAdminSession();
 ?>
 
-<?php
-if (isset(($_GET['action']))) {
-    if ($_GET['action'] == 'logout') {
-        Session::destory();
-        Helper::header("login.php");
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
