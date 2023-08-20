@@ -27,8 +27,9 @@ $locations = new LocationTable();
 				TransitWise
 				<br>
 				<p>A ride sharing and booking service. We offer convenient, affordable and safe commute.</p>
-
-				<button class="btn btn-outline-secondary btn-lg">Book Ride Now!</button>
+				<!-- <button class="btn btn-outline-secondary btn-lg ">Book Ride Now!</button> -->
+				<a href="bookRide.php" class="btn  btn-secondary btn-lg" style="border: 1px solid rgb(7, 43, 88);
+    background: rgb(7, 43, 88);">Book Ride Now!</a>
 			</h1>
 		</div>
 	</div>

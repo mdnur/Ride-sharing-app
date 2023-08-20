@@ -61,8 +61,9 @@ use lib\Session;
           </a>
           <?php $credit = new CreditTable(); $credit =$credit->getRemainingCredit(Session::get('rider')['id'])?>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item disabled" >Remain:<?php echo( $credit['remaining_credit']);?></a>
+            <a class="dropdown-item disabled" >Balance:<?php echo( $credit['remaining_credit']);?></a>
             <a class="dropdown-item" href="add_credit.php">Add Credit</a>
+            <a class="dropdown-item" href="credit_history.php">Credit History</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="home.php?action=logout">Logout</a>
           </div>

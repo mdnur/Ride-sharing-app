@@ -20,4 +20,13 @@ class CreditTable extends MainTable
         $stmt->execute();
         return $stmt->fetch();
     }
+
+
+    public function getRiderByFieldName($fieldName,$value){
+        $sql = "SELECT * FROM ".$this->table." WHERE  ".$fieldName."= :" .$fieldName;
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":".$fieldName."",$value);
+        $stmt->execute();
+        return $stmt->fetchAll();//PDO::FETCH_OBJ
+    }
 }

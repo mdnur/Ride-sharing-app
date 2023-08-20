@@ -9,6 +9,12 @@ use lib\Session;
 Session::CheckSession();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $credit = new CreditTable(); $credit =$credit->getRemainingCredit(Session::get('rider')['id']);
+
+    if($credit['remaining_credit'] < $_POST['expense_amount']){
+        Session::set("flash_message", "Insufficient Credit");
+        header("Location: booking_confirm.php?id=".$_POST['rideBookID']);
+    }
     if($_POST['dropId'] == '' || $_POST['pickUpId'] == ''){
         Session::set("flash_message", "Drop Location or Pick up Location not selected");
         header("Location: booking_confirm.php?id=".$_POST['rideBookID']);

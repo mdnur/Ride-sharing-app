@@ -38,4 +38,10 @@ class TimeHelper
         }
         return true;
     }
+
+    public static function getFormattedTime4($time)
+    {
+        $timestamp = strtotime($time);
+        return date('d-M-y h:i a', $timestamp);
+    }
 }
