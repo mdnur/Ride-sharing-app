@@ -388,4 +388,55 @@ $(document).ready(function () {
 			}
 		});
 	});
+
+
+	$('#riderPhone').on('keyup', function () {
+		var inputText = $(this).val();
+		// Assuming jsonData contains the JSON data
+		$.ajax({
+			type: 'GET',
+			url: 'get_rider_suggestions.php',
+			data: {
+				query: inputText
+			},
+			dataType: 'json',
+			success: function (response) {
+				// console.log(response);
+				var jsonData = [];
+				response.forEach(function (item) {
+					jsonData.push(item.phone);
+				});
+				// console.log(jsonData);
+				$("#riderPhone").autocomplete({
+					source: jsonData
+				});
+				// $('#suggestions').html(response);
+			}
+		});
+	});
+
+
+	// $( "#riderPhone" ).autocomplete({
+		
+	// 	source: function( request, response ) {
+	// 	  $.ajax( {
+	// 		url: "get_rider_suggestions.php",
+	// 		dataType: "jsonp",
+	// 		data: {
+	// 			query: request.term
+	// 		},
+	// 		success: function( data ) {
+	// 			console.log(request.term);
+	// 		  response( data );
+	// 		}
+	// 	  } );
+	// 	},
+	// 	minLength: 2,
+	// 	select: function( event, ui ) {
+	// 	  console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	// 	}
+	//   } );
+	
+
+
 })

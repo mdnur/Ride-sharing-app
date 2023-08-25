@@ -141,6 +141,23 @@
     </li>
 
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserRidingBooking" aria-expanded="true" aria-controls="collapseUserRidingBooking">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>User Ride Book</span>
+        </a>
+        <div id="collapseUserRidingBooking" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <a class="collapse-item" href="add_admin.php">Add Admin</a> -->
+                <a class="collapse-item" href="showAllActiveRoute.php">All Active Route</a>
+                <a class="collapse-item" href="bookingLis.php">Show all Booking</a>
+            </div>
+        </div>
+       
+        
+    </li>
+
+
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">

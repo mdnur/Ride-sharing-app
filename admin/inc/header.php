@@ -6,7 +6,7 @@ require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 
 
 spl_autoload_register(function ($class) {
-    include(realpath(dirname(__FILE__) . "/../../Classes/" . $class . ".php"));
+    include(realpath(dirname(__FILE__) . "/../../classes/" . $class . ".php"));
 
     // include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
 });
@@ -32,6 +32,7 @@ Session::CheckAdminSession();
     <meta name="author" content="">
 
     <title>TransitWise- Dashboard</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- Custom fonts for this template-->
     <link href="/../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -82,7 +83,7 @@ Session::CheckAdminSession();
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo Session::getName('admin')?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo Session::getName('admin') ?></span>
                                 <img class="img-profile rounded-circle" src="/../../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -114,4 +115,3 @@ Session::CheckAdminSession();
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-

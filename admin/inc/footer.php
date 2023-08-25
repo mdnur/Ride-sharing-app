@@ -50,6 +50,7 @@
 <!-- Core plugin JavaScript-->
 <script src="/../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 
 
@@ -73,7 +74,11 @@
 <!-- Page level plugins -->
 <script src="/../../vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/../../js/main.js"></script>
+
 <!-- Database JavaScript-->
+
+
 
 </body>
 
