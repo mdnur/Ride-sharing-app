@@ -84,10 +84,21 @@ $admin = new AdminTable();
                             <td><?php echo $row['StartJourneyTime']; ?></td>
                             <td><?php echo $row['DepartureTime']; ?></td>
                             <td><?php echo $row['driverPayment']; ?></td>
-                            <td><?php echo $route->getStatus($row['status']); ?></td>
+                            <td><span class="badge badge-pill 
+                            <?php if ($row['status'] == 2) {
+                                echo "badge-success";
+                            } else if ($row['status'] == 1) {
+                                echo "badge-info";
+                            } else if ($row['status'] == 3) {
+                                echo "badge-danger";
+                            } else if ($row['status'] == 0) {
+                                echo "badge-primary";
+                            } ?>
+                        ">
+                                    <?php echo $route->getStatus($row['status']); ?></span></td>
                             <td><?php echo ($admin->readByid($row['createdbyID']))['name'] ?></td>
                             <td><?php echo $row['created_at']; ?></td>
-                            <td><a href="update_route.php?id=<?php echo $row['id']; ?>"  class="btn btn-primary">Edit</a>  <a class="btn btn-danger" href="">Delete</a></td>
+                            <td><a href="update_route.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a> <a class="btn btn-danger" href="">Delete</a></td>
                         </tr>
                     <?php } ?>
 

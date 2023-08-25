@@ -174,4 +174,42 @@ class UserRideBookTable extends MainTable
             echo "Active";
         }
     }
+
+    public function getRideBookByDateAndAll( $date)
+    {
+        $sql = "SELECT urb.id AS rideBookID,rider.username AS userName, urb.riderID, urb.pickUpId, urb.dropId,
+        p.name AS pickUpLocation, d.name AS dropLocation,r.locationId_From,r.locationId_To,
+        dr.name AS driverName, r.status AS rideStatus,
+        r.Fare AS rideFare, r.StartJourneyTime 
+        FROM userRideBook urb
+        JOIN SubLocation p ON urb.pickUpId = p.id
+        JOIN SubLocation d ON urb.dropId = d.id
+        JOIN rider ON urb.riderID = rider.id
+        JOIN route r ON urb.rideBookID = r.id
+        JOIN driver dr ON r.driverID = dr.id
+        WHERE  DATE(r.StartJourneyTime) >= :dates ORDER BY r.StartJourneyTime DESC";
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":dates", $date);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount();//PDO::FETCH_OBJ
+    }
+
+    public function showAllBooking()
+    {
+        $sql = "SELECT urb.id AS rideBookID,rider.username AS userName, urb.riderID, urb.pickUpId, urb.dropId,
+        p.name AS pickUpLocation, d.name AS dropLocation,r.locationId_From,r.locationId_To,
+        dr.name AS driverName, r.status AS rideStatus,
+        r.Fare AS rideFare, r.StartJourneyTime 
+        FROM userRideBook urb
+        JOIN SubLocation p ON urb.pickUpId = p.id
+        JOIN SubLocation d ON urb.dropId = d.id
+        JOIN rider ON urb.riderID = rider.id
+        JOIN route r ON urb.rideBookID = r.id
+        JOIN driver dr ON r.driverID = dr.id  ORDER BY r.StartJourneyTime DESC";
+        $stmt = Database::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        // return $stmt->rowCount();//PDO::FETCH_OBJ
+    }
 }
