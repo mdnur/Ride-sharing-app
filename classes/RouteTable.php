@@ -148,4 +148,40 @@ class RouteTable extends MainTable
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function getIncomeByMonth()
+    { //monthlyIncome
+        $sql = "SELECT
+                    SUM(r.Fare) AS monthlyIncome
+                FROM route r
+                JOIN userRideBook ur ON r.id = ur.rideBookID
+                WHERE r.status = 2
+                AND MONTH(r.StartJourneyTime) = MONTH(CURRENT_DATE())
+                AND YEAR(r.StartJourneyTime) = YEAR(CURRENT_DATE());";
+        $stmt = Database::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function getIncomeByYear()
+    { //monthlyIncome
+        $sql = "SELECT
+                    SUM(r.Fare) AS yearlyIncome
+                FROM route r
+                JOIN userRideBook ur ON r.id = ur.rideBookID
+                WHERE r.status = 2
+                AND YEAR(r.StartJourneyTime) = YEAR(CURRENT_DATE());";
+        $stmt = Database::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function countStatusByActive()
+    {
+        $sql = "SELECT COUNT(*) AS totalRoute
+                FROM route
+                WHERE status = 2;";
+        $stmt = Database::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }

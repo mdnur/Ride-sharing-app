@@ -212,4 +212,12 @@ class UserRideBookTable extends MainTable
         return $stmt->fetchAll();
         // return $stmt->rowCount();//PDO::FETCH_OBJ
     }
+    public function countStatusByActive()
+    {
+        $sql = "SELECT COUNT(*) AS totalBook
+                FROM ".$this->table;
+        $stmt = Database::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
