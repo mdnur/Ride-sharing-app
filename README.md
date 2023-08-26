@@ -17,20 +17,6 @@ Developer: **Md Reasat Ahmed**
 
 Import **ride-sharing\_2023-08-26.sql** file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in **config/Config.php** 
 
-**Example:**
-
-<?php
-
-const DB\_HOST = "localhost"; // put you hostname here 
-
-const DB\_NAME = "ride-sharing"; // put you database name here
-
-const DB\_USER = "root";  //put you database username here
-
-const DB\_PASS = "password"; // put you password here
-
-
-
 **Admin credential** 
 
 email : [mdnur@app.com]() 
