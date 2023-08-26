@@ -18,41 +18,48 @@ $driver = $driver->readByid($userID);
 
 
 ?>
-
-<div class="card-header">My Profile</div>
-
-<div class="card-body">
-    <center>
-        <div class="login">
-            <form id="login" method="post" action="">
-                <label for="name"><b>Name
-                    </b>
-                </label>
-                <input type="text" name="name" id="name" readonly value="<?php echo $driver['name'] ?>">
-                <br><br>
-
-                <label for="username"><b>Username
-                    </b>
-                </label>
-                <input type="text" name="username" id="username" readonly value="<?php echo $driver['username'] ?>">
-                <br><br>
-
-                <label for="email"><b>Email
-                    </b>
-                </label>
-                <input type="email" name="email" id="email" readonly value="<?php echo $driver['email'] ?>">
-                <br><br>
-                <label for="phone"><b>phone
-                    </b>
-                </label>
-                <input type="text" id="phone" name="phone" pattern="^01[3456789]\d{8}$" readonly value="<?php echo $driver['phone'] ?>" title="Bangladesh phone number: 01XXXXXXXXX">
-                <br><br>
-
-
-                <a href="index.php">Home </a>
-            </form>
+<div class="card">
+    <div class="card-header justify-content-between d-flex">
+        <div class="">
+            <h5 class="mt-10">My Profile</h5>
         </div>
-    </center>
+        <div>
 
+        </div>
+    </div>
+
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label for="staticName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" name="name" value="<?php echo $driver['name'] ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="staticUsername" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticUsername" name="username" value="<?php echo $driver['username'] ?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="email" value="<?php echo $driver['email'] ?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticPhone" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    <input type="phone" readonly class="form-control-plaintext" id="staticPhone" name="phone" value="<?php echo $driver['phone'] ?>">
+                </div>
+            </div>
+            <a role="button" href="index.php" class="btn btn-primary">Back </a>
+            <a role="button" href="edit_profile.php" class="btn btn-primary">Edit </a>
+
+        </form>
+
+    </div>
 </div>
 <?php include_once "inc/footer.php"; ?>

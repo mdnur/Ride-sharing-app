@@ -28,7 +28,7 @@ class AdminLogin
      * @return Login
      */
     public function setEmail(string $email): AdminLogin
-    
+
     {
         $this->email = $email;
         return $this;
@@ -61,23 +61,42 @@ class AdminLogin
         $password = $this->getPassword();
         if ($email == "" || $password == "") {
             if (session_status() === PHP_SESSION_NONE) {
-               Session::init();
-            }            
+                Session::init();
+            }
             Session::set("flash_message", "Email or Password must not be empty");
             return false;
         }
         $adminTable = new AdminTable();
         $admin = $adminTable->getAdminByEmailAndPassword($email, $password);
-        if($admin == null){
+        if ($admin == null) {
             if (session_status() === PHP_SESSION_NONE) {
                 Session::init();
-             }            
-             Session::set("flash_message", "Email or Password is incorrect");
-             return false;
+            }
+            Session::set("flash_message", "Email or Password is incorrect");
+            return false;
         }
         return $admin;
     }
+    public function changePassword($old_password, $new_password, $confirm_password)
+    {
+        $admin = new AdminTable();
+        $adminInfo = $admin->readByid(Session::get('admin')['id']);
+        if ($adminInfo['password'] != $old_password) {
+            Session::set("flash_message_info", "Old Password is incorrect");
+            return false;
+        }
 
+        Validation::required($old_password, 'old_password');
+        Validation::required($new_password, 'password');
+        Validation::required($confirm_password, 'confirm_password');
+        Validation::confirm_password($new_password, $confirm_password);
 
-  
+        $data = [
+            'password' => $new_password
+        ];
+        if ($admin->update($data, Session::get('admin')['id'])) {
+            Session::set("flash_message_success", "Password Changed Successfully");
+            return true;
+        }
+    }
 }
