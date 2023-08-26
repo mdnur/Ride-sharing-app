@@ -40,26 +40,29 @@ Session::checkDriverLogin();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'] ?? null;
+
+        // print_r($email);
 
         unset($_POST['remember']);
 
         $login = new DriverLogin();
         $login->setEmail($email);
-        $login->setPassword($password);
-        // print_r($_POST);
-        if ($driver = $login->login()) {
-            if ($remember != null) {
-                $expirationTime = time() + 10;
-                setcookie('emailD', $_POST['email'], $expirationTime); //1 hour
-                setcookie('passwordD', $_POST['password'], $expirationTime); //1 hour
+        if ($login->forgetPassword()) {
+            $token = bin2hex(random_bytes(2));
+            $decimalToken = hexdec($token);
+
+            if ($login->sendmail($email, $decimalToken)) {
+                if (session_status() === PHP_SESSION_NONE) {
+                    Session::init();
+                }
+                Session::set("flash_message", "Email sent successfully");
+                header("Location: reset_password.php?email=$email");
+            } else {
+                if (session_status() === PHP_SESSION_NONE) {
+                    Session::init();
+                }
+                Session::set("flash_message", "Email not sent");
             }
-            Session::init();
-            Session::set("driver", $driver);
-            $_SESSION['driver'] = $driver;
-            Session::set("driverLogin", true);
-            header("Location: index.php");
         }
     }
 
@@ -74,7 +77,7 @@ Session::checkDriverLogin();
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Driver Login</h4>
+                            <h4>Driver Forget Password</h4>
                         </div>
                         <div class="card-body">
                             <?php if (Session::get('flash_message')) { ?>
@@ -95,30 +98,13 @@ Session::checkDriverLogin();
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                    <div class="col-md-6">
-                                        <input type="Password" name="password" id="password" class="form-control" placeholder="Password" value="<?php echo $_COOKIE['passwordD'] ?? '' ?>">
-                                    </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember"> Remember Me
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
-                                    <a href="forget_password.php" class="btn btn-link">
-                                        Forgot Your Password?
-                                    </a>
+
                                 </div>
                             </form>
                         </div>

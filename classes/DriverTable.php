@@ -31,4 +31,12 @@ class DriverTable extends MainTable{
         $stmt->execute();
         return $stmt->rowCount();//PDO::FETCH_OBJ
     }
+    public function getDriverDataByFieldName($fieldName, $value)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":" . $fieldName . "", $value);
+        $stmt->execute();
+        return $stmt->fetch(); //PDO::FETCH_OBJ
+    }
 }

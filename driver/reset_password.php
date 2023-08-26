@@ -21,6 +21,37 @@ spl_autoload_register(function ($class) {
 
 Session::checkDriverLogin();
 ?>
+
+
+<?php
+
+$email = $_GET['email'] ?? '';
+if (empty($email)) {
+    header("Location: forget_password.php");
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $code = $_POST['code'];
+
+
+    unset($_POST['remember']);
+
+    $login = new DriverLogin();
+    if ($login->resetPassword($email, $code)) {
+        if (session_status() === PHP_SESSION_NONE) {
+            Session::init();
+        }
+        header("Location: new_password.php?token=$code&email=$email");
+    } else {
+        if (session_status() === PHP_SESSION_NONE) {
+            Session::init();
+        }
+        Session::set("flash_message", "code not matched");
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -36,45 +67,13 @@ Session::checkDriverLogin();
 </head>
 
 <body>
-    <?php
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'] ?? null;
-
-        unset($_POST['remember']);
-
-        $login = new DriverLogin();
-        $login->setEmail($email);
-        $login->setPassword($password);
-        // print_r($_POST);
-        if ($driver = $login->login()) {
-            if ($remember != null) {
-                $expirationTime = time() + 10;
-                setcookie('emailD', $_POST['email'], $expirationTime); //1 hour
-                setcookie('passwordD', $_POST['password'], $expirationTime); //1 hour
-            }
-            Session::init();
-            Session::set("driver", $driver);
-            $_SESSION['driver'] = $driver;
-            Session::set("driverLogin", true);
-            header("Location: index.php");
-        }
-    }
-
-
-    ?>
-
-
-
     <main class="login-form">
         <div class="container">
             <div class="row justify-content-center align-items-center min-vh-100">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Driver Login</h4>
+                            <h4>Driver Forget Password</h4>
                         </div>
                         <div class="card-body">
                             <?php if (Session::get('flash_message')) { ?>
@@ -86,39 +85,24 @@ Session::checkDriverLogin();
                                 </div>
                             <?php unset($_SESSION['flash_message']);
                             } ?>
+                           
+
                             <form method="post" action="">
                                 <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                                    <label for="code" class="col-md-4 col-form-label text-md-right">Code</label>
                                     <div class="col-md-6">
-                                        <input type="email" name="email" id="email" placeholder="john@example.com" value="<?php echo $_COOKIE['emailD'] ?? ($_POST['email'] ?? '') ?>" class="form-control" autofocus>
+                                        <input type="text" name="code" id="code" class="form-control" autofocus>
 
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                    <div class="col-md-6">
-                                        <input type="Password" name="password" id="password" class="form-control" placeholder="Password" value="<?php echo $_COOKIE['passwordD'] ?? '' ?>">
-                                    </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember"> Remember Me
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Login
+                                        Submit
                                     </button>
-                                    <a href="forget_password.php" class="btn btn-link">
-                                        Forgot Your Password?
-                                    </a>
+
                                 </div>
                             </form>
                         </div>
