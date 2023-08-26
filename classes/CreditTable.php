@@ -6,6 +6,7 @@ require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 
 require_once(realpath(dirname(__FILE__) . '/../lib/MainTable.php'));
 require_once(realpath(dirname(__FILE__) . '/../lib/Database.php'));
+
 use lib\Database;
 use lib\MainTable;
 
@@ -16,9 +17,8 @@ class CreditTable extends MainTable
 
     public function getRemainingCredit($id)
     {
-        $sql = "SELECT
-        (SELECT SUM(credit_amount) FROM user_credit WHERE user_id = :user_id) -
-        (SELECT SUM(expense_amount) FROM expense_credit WHERE user_id = :user_id) AS remaining_credit;";
+        $sql = "SELECT COALESCE((SELECT SUM(credit_amount) FROM user_credit WHERE user_id = :user_id),0) -
+        COALESCE((SELECT SUM(expense_amount) FROM expense_credit WHERE user_id = :user_id),0) AS remaining_credit;";
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":user_id", $id);
         $stmt->execute();
@@ -26,11 +26,12 @@ class CreditTable extends MainTable
     }
 
 
-    public function getRiderByFieldName($fieldName,$value){
-        $sql = "SELECT * FROM ".$this->table." WHERE  ".$fieldName."= :" .$fieldName;
+    public function getRiderByFieldName($fieldName, $value)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
         $stmt = Database::prepare($sql);
-        $stmt->bindParam(":".$fieldName."",$value);
+        $stmt->bindParam(":" . $fieldName . "", $value);
         $stmt->execute();
-        return $stmt->fetchAll();//PDO::FETCH_OBJ
+        return $stmt->fetchAll(); //PDO::FETCH_OBJ
     }
 }
