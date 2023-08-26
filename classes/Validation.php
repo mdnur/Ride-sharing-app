@@ -1,7 +1,12 @@
 <?php 
 
 use lib\Session;
-require_once $_SERVER['DOCUMENT_ROOT']."/lib/Session.php";
+// require_once $_SERVER['DOCUMENT_ROOT']."/lib/Session.php";
+
+require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
+
+require_once(realpath(dirname(__FILE__) . '/../lib/MainTable.php'));
+require_once(realpath(dirname(__FILE__) . '/../lib/Database.php'));
 
 class Validation{
     public static function required($value, $field_name){

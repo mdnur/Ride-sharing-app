@@ -11,7 +11,7 @@ use lib\Session;
 <html lang="en">
 
 <head>
-    <title>Bootstrap 4 landing page</title>
+    <title>TransitWise</title>
     <!-- add bootstrap css file -->
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
