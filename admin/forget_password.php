@@ -42,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Session::set("flash_message", "Email not sent");
         }
     }
-   
-    
 }
 
 

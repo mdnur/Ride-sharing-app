@@ -5,6 +5,7 @@
 require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 require_once(realpath(dirname(__FILE__) . '/../lib/MainTable.php'));
 require_once(realpath(dirname(__FILE__) . '/../lib/Database.php'));
+
 use lib\Database;
 use lib\MainTable;
 
@@ -44,11 +45,19 @@ class RiderTable extends MainTable
     public function searchByFieldName($fieldName, $value)
     {
         // $sql = "SELECT name FROM ".$this->table." WHERE ".$fieldName." LIKE '%':".$fieldName."'%' LIMIT 10";
-        $sql = "SELECT phone FROM rider WHERE phone LIKE :".$fieldName." LIMIT 10";
+        $sql = "SELECT phone FROM rider WHERE phone LIKE :" . $fieldName . " LIMIT 10";
         $stmt = Database::prepare($sql);
         $searchValue = '%' . $value . '%';
-        $stmt->bindParam(':'.$fieldName, $searchValue, PDO::PARAM_STR);
+        $stmt->bindParam(':' . $fieldName, $searchValue, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function getRiderDataByFieldName($fieldName, $value)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
+        $stmt = Database::prepare($sql);
+        $stmt->bindParam(":" . $fieldName . "", $value);
+        $stmt->execute();
+        return $stmt->fetch(); //PDO::FETCH_OBJ
     }
 }

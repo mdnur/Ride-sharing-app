@@ -7,6 +7,43 @@ use lib\Session;
 
 Session::checkLogin();
 ?>
+
+<?php
+include_once 'classes/Login.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+
+    // print_r($email);
+
+    unset($_POST['remember']);
+
+    $login = new Login();
+    $login->setEmail($email);
+    if($login->forgetPassword()){
+        $token = bin2hex(random_bytes(2)); 
+        $decimalToken = hexdec($token);
+
+        if($login->sendmail($email,$decimalToken)){
+            if (session_status() === PHP_SESSION_NONE) {
+                Session::init();
+            }
+            Session::set("flash_message", "Email sent successfully");
+            header("Location: reset_password.php?email=$email");
+        }
+        else{
+            if (session_status() === PHP_SESSION_NONE) {
+                Session::init();
+            }
+            Session::set("flash_message", "Email not sent");
+        }
+    }
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -101,37 +138,6 @@ Session::checkLogin();
 </head>
 
 <body class="my-login-page">
-    <?php
-    include_once 'classes/Login.php';
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Function to generate a unique token
-        $remember = $_POST['remember'] ?? null;
-
-        unset($_POST['remember']);
-
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $login = new Login();
-        $login->setEmail($email);
-        $login->setPassword($password);
-        if ($rider = $login->login()) {
-            if ($remember != null) {
-                $expirationTime = time() + 60 * 60;
-                setcookie('email', $_POST['email'], $expirationTime); //1 hour
-                setcookie('password', $_POST['password'], $expirationTime); //1 hour
-            }
-
-
-            Session::init();
-            Session::set("rider", $rider);
-            Session::set("login", true);
-            header("Location: home.php");
-        }
-    }
-
-
-    ?>
 
     <section class="h-100">
         <div class="container h-100">
@@ -152,41 +158,22 @@ Session::checkLogin();
                                 </div>
                             <?php unset($_SESSION['flash_message']);
                             } ?>
-                            <form method="POST" class="my-login-validation" novalidate="" action="">
+                            <form method="POST" class="my-login-validation" novalidate="">
                                 <div class="form-group">
                                     <label for="email">E-Mail Address</label>
-                                    <input id="email" type="email" class="form-control" name="email" value="<?php echo $_COOKIE['email'] ?? '' ?>" required autofocus>
+                                    <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                                     <div class="invalid-feedback">
                                         Email is invalid
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password">Password
-                                        <a href="forget_password.php" class="float-right">
-                                            Forgot Password?
-                                        </a>
-                                    </label>
-                                    <input id="password" type="password" class="form-control" name="password" value="<?php echo $_COOKIE['password'] ?? '' ?>" required data-eye>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="remember" id="remember" class="custom-control-input">
-                                        <label for="remember" class="custom-control-label">Remember Me</label>
+                                    <div class="form-text text-muted">
+                                        By clicking "Reset Password" we will send a password reset code
                                     </div>
                                 </div>
 
                                 <div class="form-group m-0">
                                     <button type="submit" class="btn btn-primary btn-block">
-                                        Login
+                                        Reset Password
                                     </button>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    Don't have an account? <a href="signUp.php">Create One</a>
                                 </div>
                             </form>
                         </div>
@@ -208,70 +195,6 @@ Session::checkLogin();
     <!-- <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src='js/main.js'></script>
-    <script>
-        // 'use strict';
-
-
-        $(function() {
-            $("input[type='password'][data-eye]").each(function(i) {
-                var $this = $(this),
-                    id = 'eye-password-' + i;
-
-                $this.wrap($("<div/>", {
-                    style: 'position:relative',
-                    id: id
-                }));
-
-                $this.css({
-                    paddingRight: 60
-                });
-
-                $this.after($("<div/>", {
-                    html: 'Show',
-                    class: 'btn btn-primary btn-sm',
-                    id: 'passeye-toggle-' + i,
-                }).css({
-                    position: 'absolute',
-                    right: 10,
-                    top: ($this.outerHeight() / 2) - 12,
-                    padding: '2px 7px',
-                    fontSize: 12,
-                    cursor: 'pointer',
-                }));
-
-
-                $this.on("keyup paste", function() {
-                    $("#" + id).val($(this).val());
-                });
-
-                $("#passeye-toggle-" + i).on("click", function() {
-                    if ($this.hasClass("show")) {
-                        $this.attr('type', 'password');
-                        $this.removeClass("show");
-                    } else {
-                        $this.attr('type', 'text');
-                        $this.val($("#" + id).val());
-                        $this.addClass("show");
-                    }
-                });
-            });
-
-
-
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 1000);
-
-            $(".my-login-validation").submit(function(event) {
-                var form = $(this);
-                if (form[0].checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.addClass('was-validated');
-            });
-        });
-    </script>
 </body>
 
 </html>
