@@ -3,10 +3,9 @@
 // require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/Session.php';
 require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 
-
+use lib\Helper;
 use lib\Session;
 
-Session::checkAdminLogin();
 ?>
 
 <?php
@@ -15,35 +14,36 @@ Session::checkAdminLogin();
 // include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/AdminLogin.php';
 include_once(realpath(dirname(__FILE__) . '/../classes/AdminLogin.php'));
 
+$email = $_GET['email'] ?? '';
+if(empty($email)){
+    Helper::header("Location: forget_password.php");
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $code = $_POST['code'];
 
-    $remember = $_POST['remember'] ?? null;
 
     unset($_POST['remember']);
 
     $login = new AdminLogin();
-    $login->setEmail($email);
-    $login->setPassword($password);
-    if ($rider = $login->login()) {
-        if ($remember != null) {
-            $expirationTime = time() + 60 * 60;
-            setcookie('emailA', $_POST['email'], $expirationTime); //1 hour
-            setcookie('passwordA', $_POST['password'], $expirationTime); //1 hour
-        }
+   if( $login->resetPassword($email,$code)){
+    if (session_status() === PHP_SESSION_NONE) {
         Session::init();
-        Session::set("admin", $rider);
-        Session::set("adminLogin", true);
-        header("Location: index.php");
-    } else {
     }
+    header("Location: new_password.php?token=$code&email=$email");
+   }
+   else{
+    if (session_status() === PHP_SESSION_NONE) {
+        Session::init();
+    }
+    Session::set("flash_message", "code not matched");
+   }
+   
+    
 }
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TransitWise- Login</title>
+    <title>Admin | Forgot Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
 
 </head>
 
@@ -85,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-2">Reset Code</h1>
+                                        <p class="mb-4">We send you a code by email . Just enter the code here!</p>
                                     </div>
                                     <?php if (Session::get('flash_message')) { ?>
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -94,43 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                    <?php unset($_SESSION['flash_message_success']);
+                                    <?php unset($_SESSION['flash_message']);
                                     } ?>
-
-                                    <?php if (Session::get('flash_message_success')) { ?>
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <?php echo Session::get('flash_message_success'); ?>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    <?php unset($_SESSION['flash_message_success']);
-                                    } ?>
-                                    <form class="user" method="POST" action="">
+                                    <form class="user" action="" method="POST">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="<?php echo $_COOKIE['emailA'] ?? '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" value="<?php echo $_COOKIE['passwordA'] ?? '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
+                                            <input type="text" name="code" class="form-control form-control-user" id="exampleInputCode" aria-describedby="CodeHelp" placeholder="Enter Code">
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Reset Password
                                         </button>
-                                        <hr>
-
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-
+                                  
                                 </div>
                             </div>
                         </div>
