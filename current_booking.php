@@ -12,7 +12,7 @@ use lib\Session;
 
 $route = new UserRideBookTable();
 // $results = $route->getRideBookByRiderId(Session::get('rider')['id']);
-$results = $route->getRideBookByRiderId(1);
+$results = $route->getRideBookByRiderId(Session::get('rider')['id']);
 
 
 

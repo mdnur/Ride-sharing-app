@@ -33,7 +33,10 @@ use lib\Session;
                     <br>
                     <p>A ride sharing and booking service. We offer convenient, affordable and safe commute.</p>
 
-                    <button class="btn btn-outline-secondary btn-lg">Register Now!</button>
+                    <!-- <a class="btn btn-outline-secondary btn-lg" href="signUp.php">Register Now!</a> -->
+
+                    <a href="signUp.php" class="btn  btn-secondary btn-lg" style="border: 1px solid rgb(7, 43, 88);
+    background: rgb(7, 43, 88);">Register Now!</a>
                 </h1>
             </div>
         </div>
