@@ -8,7 +8,7 @@ require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 
 require_once(realpath(dirname(__FILE__) . '/../lib/MainTable.php'));
 require_once(realpath(dirname(__FILE__) . '/../lib/Database.php'));
-require_once "AdminTable.php";
+require_once "driverTable.php";
 require_once "Validation.php";
 class DriverLogin
 {
@@ -78,5 +78,27 @@ class DriverLogin
             return false;
         }
         return $driver;
+    }
+    public function changePassword($old_password, $new_password, $confirm_password)
+    {
+        $driver = new DriverTable();
+        $driverInfo = $driver->readByid(Session::get('driver')['id']);
+        if ($driverInfo['password'] != $old_password) {
+            Session::set("flash_message_info", "Old Password is incorrect");
+            return false;
+        }
+
+        Validation::required($old_password, 'old_password');
+        Validation::required($new_password, 'password');
+        Validation::required($confirm_password, 'confirm_password');
+        Validation::confirm_password($new_password, $confirm_password);
+
+        $data = [
+            'password' => $new_password
+        ];
+        if ($driver->update($data, Session::get('driver')['id'])) {
+            Session::set("flash_message_success", "Password Changed Successfully");
+            return true;
+        }
     }
 }

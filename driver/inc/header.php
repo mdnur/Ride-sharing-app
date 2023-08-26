@@ -10,12 +10,6 @@ require_once(realpath(dirname(__FILE__) . '/../../lib/Session.php'));
 require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 
 
-// spl_autoload_register(function ($class) {
-//     include(realpath(dirname(__FILE__) . "/../../Classes/" . $class . ".php"));
-
-//     // include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
-// });
-
 require_once('spl_autoload.php');
 
 
@@ -113,7 +107,9 @@ if (isset(($_GET['action']))) {
                                     <?= Session::get('driver')['name']; ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="index.php?action=logout">logout</a>
+                                    <a class="dropdown-item" href="my_profile.php">Pofile</a>
+                                    <a class="dropdown-item" href="change_password.php">Change Password</a>
+                                    <a class="dropdown-item" href="index.php?action=logout">Logout</a>
                                 </div>
                             </li>
 
