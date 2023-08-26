@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 11.0.2-MariaDB)
 # Database: ride-sharing
-# Generation Time: 2023-08-14 22:13:01 +0000
+# Generation Time: 2023-08-26 16:23:56 +0000
 # ************************************************************
 
 
@@ -67,6 +67,7 @@ CREATE TABLE `driver` (
   `phone` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
+  `token` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
@@ -77,12 +78,12 @@ CREATE TABLE `driver` (
 LOCK TABLES `driver` WRITE;
 /*!40000 ALTER TABLE `driver` DISABLE KEYS */;
 
-INSERT INTO `driver` (`id`, `name`, `username`, `email`, `phone`, `password`, `role`, `created_at`)
+INSERT INTO `driver` (`id`, `name`, `username`, `email`, `phone`, `password`, `role`, `token`, `created_at`)
 VALUES
-	(1,'John Doe','johndoe123','john.doe@example.com','1234567890','password','driver','2023-07-26 20:27:59'),
-	(2,'Jane Smith','janesmith456','jane.smith@example.com','9876543210','password','driver','2023-07-26 20:27:59'),
-	(3,'Michael Johnson','michaelj','michael.johnson@example.com','5678901234','password','driver','2023-07-26 20:27:59'),
-	(5,'Driver Nur','drivernur','driver@app.com','0185500033','password','driver','2023-08-04 04:07:33');
+	(1,'John Doe','johndoe123','john.doe@example.com','1234567890','123456','driver',NULL,'2023-07-26 20:27:59'),
+	(2,'Jane Smith','janesmith456','jane.smith@example.com','9876543210','password','driver',NULL,'2023-07-26 20:27:59'),
+	(3,'Michael Johnson','michaelj','michael.johnson@example.com','5678901234','password','driver',NULL,'2023-07-26 20:27:59'),
+	(5,'Driver Nur','drivernur','driver@app.com','0185500033','passsword','driver',NULL,'2023-08-04 04:07:33');
 
 /*!40000 ALTER TABLE `driver` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -101,14 +102,25 @@ CREATE TABLE `expense_credit` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `expense_credit_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `rider` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `expense_credit` WRITE;
 /*!40000 ALTER TABLE `expense_credit` DISABLE KEYS */;
 
 INSERT INTO `expense_credit` (`id`, `user_id`, `expense_amount`, `created_at`)
 VALUES
-	(1,1,200,'2023-07-26 21:32:43');
+	(1,1,200,'2023-07-26 21:32:43'),
+	(2,1,200,'2023-08-18 07:06:43'),
+	(3,1,230,'2023-08-18 07:06:57'),
+	(4,1,230,'2023-08-19 23:01:28'),
+	(5,1,150,'2023-08-19 23:04:57'),
+	(6,1,150,'2023-08-19 23:06:37'),
+	(7,1,150,'2023-08-19 23:10:44'),
+	(8,1,150,'2023-08-19 23:10:46'),
+	(9,1,150,'2023-08-19 23:12:37'),
+	(10,1,150,'2023-08-19 23:12:44'),
+	(11,1,230,'2023-08-20 03:14:44'),
+	(12,1,220,'2023-08-25 20:25:24');
 
 /*!40000 ALTER TABLE `expense_credit` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -219,20 +231,20 @@ CREATE TABLE `rider` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
-  `status` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phone` (`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `rider` WRITE;
 /*!40000 ALTER TABLE `rider` DISABLE KEYS */;
 
 INSERT INTO `rider` (`id`, `name`, `username`, `email`, `phone`, `password`, `role`, `token`, `status`, `created_at`)
 VALUES
-	(1,'Alice Johnson','alice123','alice@example.com','1234567890','password','rider',NULL,'active','2023-07-26 20:57:27'),
+	(1,'Alice Johnson ','alice123','alice@example.com','1234567890','password','rider',NULL,'active','2023-07-26 20:57:27'),
 	(2,'Bob Smith','bobsmith456','bob@example.com','9876543210','password','rider',NULL,'active','2023-07-26 20:57:27'),
 	(3,'Charlie Brown','charlieb','charlie@example.com','5678901234','password','rider',NULL,'active','2023-07-26 20:57:27'),
 	(4,'David Lee','davidl','david@example.com','2345678901','password','rider',NULL,'active','2023-07-26 20:57:27'),
@@ -241,7 +253,9 @@ VALUES
 	(7,'Grace Wilson','gracew','grace@example.com','8901234567','password','rider',NULL,'active','2023-07-26 20:57:27'),
 	(8,'Harry Davis','harryd','harry@example.com','4567890123','password','rider',NULL,'active','2023-07-26 20:57:27'),
 	(9,'Ivy Thomas','ivythomas','ivy@example.com','9012345678','password','rider',NULL,'active','2023-07-26 20:57:27'),
-	(10,'Jack Robinson','jackr','jack@example.com','6789012345','password','rider',NULL,'active','2023-07-26 20:57:27');
+	(10,'Jack Robinson','jackr','jack@example.com','6789012345','password','rider',NULL,'active','2023-07-26 20:57:27'),
+	(11,'Cairo Mckinney','qubofiri','vylug@mailinator.com','+1 (896) 148-7777','Pa$$w0rd!','rider',NULL,'active','2015-08-23 05:08:51'),
+	(12,'Tyrone Clay','wyfifygy','pewad@mailinator.com','+1 (952) 732-5494','Pa$$w0rd!','rider',NULL,'active','2019-08-23 10:23:56');
 
 /*!40000 ALTER TABLE `rider` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -268,18 +282,21 @@ CREATE TABLE `route` (
   PRIMARY KEY (`id`),
   KEY `createdbyID` (`createdbyID`),
   CONSTRAINT `route_ibfk_1` FOREIGN KEY (`createdbyID`) REFERENCES `admin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `route` WRITE;
 /*!40000 ALTER TABLE `route` DISABLE KEYS */;
 
 INSERT INTO `route` (`id`, `driverID`, `vehicleID`, `locationId_From`, `locationId_To`, `Fare`, `StartJourneyTime`, `DepartureTime`, `driverPayment`, `createdbyID`, `created_at`, `status`)
 VALUES
-	(1,1,1,1,2,200,'2023-07-27 21:05:00','2023-07-27 21:55:00',150,1,'2023-07-26 21:09:53',0),
-	(2,2,2,1,2,200,'2023-07-27 16:05:58','2023-07-27 17:05:58',250,1,'2023-07-26 21:05:58',0),
-	(3,5,1,2,1,250,'2023-07-27 07:00:00','2023-07-27 08:00:00',180,1,'2023-07-26 21:11:24',3),
-	(4,5,6,2,4,200,'2023-07-29 18:00:00','2023-07-29 19:00:00',200,1,'2023-07-27 16:16:49',2),
-	(5,5,6,2,4,200,'2023-08-14 22:23:56','2023-08-14 22:23:56',200,1,'2023-08-14 22:23:56',0);
+	(1,1,1,1,2,200,'2023-07-27 21:05:00','2023-07-27 21:55:00',150,1,'2023-07-26 21:09:53',3),
+	(2,2,2,1,2,200,'2023-07-27 16:05:58','2023-07-27 17:05:58',250,1,'2023-07-26 21:05:58',3),
+	(3,5,1,2,1,250,'2023-07-27 07:00:00','2023-07-27 08:00:00',180,1,'2023-07-26 21:11:24',2),
+	(4,5,6,2,4,200,'2023-08-29 18:00:00','2023-07-29 19:00:00',200,1,'2023-07-27 16:16:49',2),
+	(5,5,6,2,4,200,'2023-08-19 22:23:56','2023-08-16 22:23:56',200,1,'2023-08-14 22:23:56',2),
+	(6,5,5,1,2,230,'2023-08-19 22:59:49','2023-08-18 23:30:49',220,1,'2023-08-17 22:59:49',2),
+	(7,5,2,2,3,150,'2023-08-19 03:31:37','2023-08-19 03:31:37',200,1,'2023-08-18 03:31:37',0),
+	(8,5,1,1,2,220,'2023-08-26 20:16:52','2023-08-25 20:16:52',200,1,'2023-08-25 20:16:52',0);
 
 /*!40000 ALTER TABLE `route` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -297,7 +314,7 @@ CREATE TABLE `SubLocation` (
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `SubLocation` WRITE;
 /*!40000 ALTER TABLE `SubLocation` DISABLE KEYS */;
@@ -325,7 +342,8 @@ VALUES
 	(19,'Countyard Kalabagan',2,'2023-07-26 20:46:19'),
 	(20,'Dhanmondi 6A Bus Stand',2,'2023-07-26 20:46:40'),
 	(21,'Eye Hospital Dhanmondi 27',2,'2023-07-26 20:46:56'),
-	(22,'Genetic Plaza Dhanmondi 27',2,'2023-07-26 20:47:10');
+	(22,'Genetic Plaza Dhanmondi 27',2,'2023-07-26 20:47:10'),
+	(25,'Macca Eye hospital Point',3,'2023-08-24 21:26:30');
 
 /*!40000 ALTER TABLE `SubLocation` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -347,14 +365,15 @@ CREATE TABLE `user_credit` (
   KEY `payment_Usssss` (`payment_type_id`),
   CONSTRAINT `payment_Usssss` FOREIGN KEY (`payment_type_id`) REFERENCES `admin` (`id`),
   CONSTRAINT `user_credit_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `rider` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `user_credit` WRITE;
 /*!40000 ALTER TABLE `user_credit` DISABLE KEYS */;
 
 INSERT INTO `user_credit` (`id`, `user_id`, `credit_amount`, `created_at`, `payment_type_id`)
 VALUES
-	(1,1,350,'2023-07-26 21:29:02',1);
+	(1,1,2000,'2023-07-26 21:29:02',1),
+	(2,1,500,'2023-08-18 20:15:28',1);
 
 /*!40000 ALTER TABLE `user_credit` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -381,7 +400,7 @@ CREATE TABLE `userRideBook` (
   CONSTRAINT `userRideBook` FOREIGN KEY (`pickUpId`) REFERENCES `subLocation` (`id`),
   CONSTRAINT `userridebook_ibfk_3` FOREIGN KEY (`rideBookID`) REFERENCES `Route` (`id`),
   CONSTRAINT `userridebook_ibfk_4` FOREIGN KEY (`riderID`) REFERENCES `rider` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `userRideBook` WRITE;
 /*!40000 ALTER TABLE `userRideBook` DISABLE KEYS */;
@@ -389,7 +408,13 @@ LOCK TABLES `userRideBook` WRITE;
 INSERT INTO `userRideBook` (`id`, `rideBookID`, `riderID`, `pickUpId`, `dropId`, `created_at`)
 VALUES
 	(3,1,1,1,15,'2023-07-26 21:22:27'),
-	(4,2,2,2,15,'2023-07-26 21:24:20');
+	(4,2,2,2,15,'2023-07-26 21:24:20'),
+	(5,5,1,2,15,'2023-08-15 06:04:02'),
+	(6,5,2,2,15,'2023-08-15 06:04:22'),
+	(7,5,3,2,15,'2023-08-15 06:04:37'),
+	(8,6,1,1,15,'2023-08-17 23:00:40'),
+	(9,8,1,1,13,'2023-08-25 20:25:24'),
+	(10,6,2,1,15,'2023-08-25 22:54:45');
 
 /*!40000 ALTER TABLE `userRideBook` ENABLE KEYS */;
 UNLOCK TABLES;
