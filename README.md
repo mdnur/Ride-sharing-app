@@ -1,31 +1,60 @@
 # Ride-sharing-app
-Group Project for Web-tech AIUB
-Group 2 :TransitWise, a ride-booking and ride-sharing website
-Members:
-Project Manager and Developer: Jariatun Islam
-Lead Developer: Mohammad Nur
-Developer:Sandip Misra 
-Developer:Md Reasat Ahmed 
+Group Project for Web-tech AIUB Group 2 
 
-Description: 
-TransitWise is a ride-booking and ride-sharing website that aims to revolutionize transportation by offering convenience, affordability, and safety. 
+Project Name: TransitWise
 
-Import ride-sharing_2023-08-26.sql file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in config/Config.php
+Members are 
 
-Admin credential
-email : mdnur@app.com
-password :password
+Project Manager and Developer: **Jariatun Islam** 
+
+Lead Developer: **Mohammad Nur** 
+
+Developer: **Sandip Misra** 
+
+Developer: **Md Reasat Ahmed** 
+
+**Description**: TransitWise is a ride-booking and ride-sharing website that aims to revolutionize transportation by offering convenience, affordability, and safety. 
+
+Import **ride-sharing\_2023-08-26.sql** file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in **config/Config.php** 
+
+**Example:**
+
+<?php
+
+const DB\_HOST = "localhost"; // put you hostname here 
+
+const DB\_NAME = "ride-sharing"; // put you database name here
+
+const DB\_USER = "root";  //put you database username here
+
+const DB\_PASS = "password"; // put you password here
 
 
-Driver credential
-email : driver@app.com
-password :password
 
+**Admin credential** 
 
+email : [mdnur@app.com]() 
 
-Rider credential
-email : alice@example.com
-password :password
+password : password 
 
+url: Ride-sharing-app/admin
 
-Bkash API: https://merchantdemo.sandbox.bka.sh/frontend/checkout/version/1.2.0-beta
+**Driver credential** 
+
+email : [driver@app.com]() 
+
+password : password 
+
+url: Ride-sharing-app/driver
+
+**Rider credential** 
+
+email : [alice@example.com]() 
+
+password : password 
+
+url : Ride-sharing-app/
+
+**Bkash API**: [https://merchantdemo.sandbox.bka.sh/frontend/checkout/version/1.2.0-beta]()
+
+We have use BKash API in our project  . This is just for testing purpose. You can’t give you BKash number here. Because it only uses for testing.
