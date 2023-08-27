@@ -4,13 +4,12 @@
 require_once(realpath(dirname(__FILE__) . '/../../lib/Session.php'));
 require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 
-
+//loop to include all the class files 
 spl_autoload_register(function ($class) {
     include(realpath(dirname(__FILE__) . "/../../classes/" . $class . ".php"));
 
     // include $_SERVER['DOCUMENT_ROOT'] . "/Classes/" . $class . ".php";
 });
-
 
 
 use lib\Session;
@@ -41,7 +40,7 @@ Session::CheckAdminSession();
 
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -68,16 +67,11 @@ Session::CheckAdminSession();
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
+            
 
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-
-
-
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->

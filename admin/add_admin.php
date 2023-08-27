@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
     unset($_POST['confirm_password']);
-    unset($_POST['log']);
+    // unset($_POST['log']);
     $_POST['role'] = 'admin';
     $data = $_POST;
 
