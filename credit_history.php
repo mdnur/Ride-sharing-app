@@ -58,7 +58,7 @@ $expenses = $expense->getRiderByFieldName('user_id', Session::get('rider')['id']
                                                             <tr>
                                                                 <td><?php echo $count++; ?></td>
                                                                 <td><?php echo $row['credit_amount']; ?></td>
-                                                                <td><?php  if($row['payment_type_id'] == 1){ echo 'BKash';}; ?></td>
+                                                                <td><?php  if($row['payment_type_id'] == 1){ echo 'BKash';}elseif($row['payment_type_id'] == 2){echo 'Bonus';} ?></td>
                                                                 <td><?php echo TimeHelper::getFormattedTime4($row['created_at']); ?></td>
                                                             </tr>
                                                         <?php } ?>

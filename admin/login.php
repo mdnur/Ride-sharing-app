@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 
 </head>
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                    <?php unset($_SESSION['flash_message_success']);
+                                    <?php unset($_SESSION['flash_message']);
                                     } ?>
 
                                     <?php if (Session::get('flash_message_success')) { ?>
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="forget_password.php">Forgot Password?</a>
                                     </div>
 
                                 </div>

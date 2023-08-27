@@ -9,6 +9,7 @@ require_once(realpath(dirname(__FILE__) . '/../lib/Session.php'));
 require_once(realpath(dirname(__FILE__) . '/../lib/Database.php'));
 
 require_once "RiderTable.php";
+require_once "CreditTable.php";
 require_once "Validation.php";
 class Login
 {
@@ -87,9 +88,18 @@ class Login
 
         $riderTable = new RiderTable();
         if (Session::get('flash_message') == null) {
-            // echo $riderTable->getRiderByFieldName('email',$post['email']);
-            print_r($post);
+            
+            // print_r($post);
             if ($riderTable->insert($post)) {
+                $id =  ($riderTable->getRiderByFieldNameS('email',$post['email']))['id'];
+                $data = [
+                    'credit_amount'=> 500,
+                    'user_id' => $id,
+                    'payment_type_id' =>2,
+                    'created_at' => date('d-m-y h:i:s')
+                ];
+                $credit = new CreditTable();
+                $credit->insert($data);
                 return $this->login();
             }
         }

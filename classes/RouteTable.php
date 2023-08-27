@@ -52,7 +52,8 @@ class RouteTable extends MainTable
 
     public function getRouteByFieldName($fieldName, $value)
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE  " . $fieldName . "= :" . $fieldName;
+        $sql = "SELECT * FROM " . $this->table . " WHERE " . $fieldName . " = :" . $fieldName . " ORDER BY id DESC";
+
         $stmt = Database::prepare($sql);
         $stmt->bindParam(":" . $fieldName . "", $value);
         $stmt->execute();

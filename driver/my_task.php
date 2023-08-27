@@ -34,7 +34,7 @@ $admin = new AdminTable();
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>driver Name</th>
+                    <!-- <th>driver Name</th> -->
                     <!-- <th>vehicleID</th> -->
                     <th>From</th>
                     <th>To</th>
@@ -53,7 +53,8 @@ $admin = new AdminTable();
                 <?php foreach ($results as $row) { ?>
                     <tr>
                         <td><?php echo $row['id']; ?></td>
-                        <td><?php echo ($drivers->readByid($row['driverID']))['name'] ?></td>
+                        <!-- <td><?php //echo ($drivers->readByid($row['driverID']))['name'] 
+                                    ?></td> -->
                         <!-- <td><?php //echo ($vehicles->readByid($row['vehicleID']))['make']
                                     ?></td> -->
                         <td><?php echo ($locations->readByid($row['locationId_From']))['name'] ?></td>
@@ -81,10 +82,12 @@ $admin = new AdminTable();
                                     ?></td> -->
                         <td>
                             <a class="btn btn-primary" href="ViewRiderOfRoute.php?id=<?php echo $row['id']; ?>">View All Rider</a>
-                            <?php if ($row['status'] == 0) { ?>
-                                <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=1">Processing</a>
-                            <?php } else if ($row['status'] == 1) { ?>
-                                <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=2">Complete</a>
+                            <?php if (TimeHelper::checkTimeDiff($row['DepartureTime'])) { ?>
+                                <?php if ($row['status'] == 0) { ?>
+                                    <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=1">Processing</a>
+                                <?php } else if ($row['status'] == 1) { ?>
+                                    <a class="btn btn-danger" href="taskStatusUpdate.php?id=<?php echo $row['id']; ?>&status=2">Complete</a>
+                                <?php } ?>
                             <?php } ?>
                         </td>
 
