@@ -102,7 +102,7 @@ Session::checkDriverLogin();
 
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Login
+                                      Reset Password!
                                     </button>
 
                                 </div>

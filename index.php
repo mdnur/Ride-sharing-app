@@ -139,7 +139,7 @@ use lib\Session;
                     <span class="text-muted">Front End Developer</span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 item">
-                    <img src="images/T2.png" class="img-fluid" alt="team">
+                    <img src="images/Reasat.png" class="img-fluid" alt="team">
                     <div class="des">
                         MD Reasat Ahmed
                     </div>
