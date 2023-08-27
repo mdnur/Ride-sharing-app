@@ -1,5 +1,4 @@
 # Ride-sharing-app
-Group Project for Web-tech AIUB Group 2 
 
 Project Name: TransitWise
 
@@ -16,20 +15,6 @@ Developer: **Md Reasat Ahmed**
 **Description**: TransitWise is a ride-booking and ride-sharing website that aims to revolutionize transportation by offering convenience, affordability, and safety. 
 
 Import **ride-sharing\_2023-08-26.sql** file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in **config/Config.php** 
-
-**Example:**
-
-<?php
-
-const DB\_HOST = "localhost"; // put you hostname here 
-
-const DB\_NAME = "ride-sharing"; // put you database name here
-
-const DB\_USER = "root";  //put you database username here
-
-const DB\_PASS = "password"; // put you password here
-
-
 
 **Admin credential** 
 
