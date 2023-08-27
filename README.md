@@ -1,32 +1,45 @@
 # Ride-sharing-app
-Group Project for Web-tech AIUB
 
-Group 2 :TransitWise, a ride-booking and ride-sharing website
-Members:
-Project Manager and Developer: Jariatun Islam
-Lead Developer: Mohammad Nur
-Developer:Sandip Misra 
-Developer:Md Reasat Ahmed 
+Project Name: TransitWise
 
-Description: 
-TransitWise is a ride-booking and ride-sharing website that aims to revolutionize transportation by offering convenience, affordability, and safety. 
+Members are 
 
-Import ride-sharing_2023-08-26.sql file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in config/Config.php
+Project Manager and Developer: **Jariatun Islam** 
 
-Admin credential
-email : mdnur@app.com
-password :password
+Lead Developer: **Mohammad Nur** 
 
+Developer: **Sandip Misra** 
 
-Driver credential
-email : driver@app.com
-password :password
+Developer: **Md Reasat Ahmed** 
 
+**Description**: TransitWise is a ride-booking and ride-sharing website that aims to revolutionize transportation by offering convenience, affordability, and safety. 
 
+Import **ride-sharing\_2023-08-26.sql** file in XAMPP MySQL. Change the database connection in codes according to your own computer SQL server connection in **config/Config.php** 
 
-Rider credential
-email : alice@example.com
-password :password
+**Admin credential** 
 
+email : [mdnur@app.com]() 
 
-Bkash API: https://merchantdemo.sandbox.bka.sh/frontend/checkout/version/1.2.0-beta
+password : password 
+
+url: Ride-sharing-app/admin
+
+**Driver credential** 
+
+email : [driver@app.com]() 
+
+password : password 
+
+url: Ride-sharing-app/driver
+
+**Rider credential** 
+
+email : [alice@example.com]() 
+
+password : password 
+
+url : Ride-sharing-app/
+
+**Bkash API**: [https://merchantdemo.sandbox.bka.sh/frontend/checkout/version/1.2.0-beta]()
+
+We have use BKash API in our project  . This is just for testing purpose. You can’t give you BKash number here. Because it only uses for testing.
