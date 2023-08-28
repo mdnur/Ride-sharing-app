@@ -1,6 +1,7 @@
 <?php include_once "inc/header.php"; ?>
 <?php
 
+use lib\Helper;
 use lib\Session;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $route = new RouteTable();
 
     if ($route->insert($data)) {
-        header("Location: index.php");
+        Helper::header("Location: index.php");
     } else {
         echo "Something went wrong";
     }
