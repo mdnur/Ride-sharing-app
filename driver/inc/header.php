@@ -10,7 +10,7 @@ require_once(realpath(dirname(__FILE__) . '/../../lib/Session.php'));
 require_once(realpath(dirname(__FILE__) . '/../../lib/Helper.php'));
 
 
-require_once('spl_autoload.php');
+require_once('spl_autoload.php'); //class loop
 
 
 // require_once "lib/Session.php";
@@ -101,7 +101,7 @@ if (isset(($_GET['action']))) {
 
                     </ul>
                     <div class="form-inline my-2 my-lg-0">
-                        <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                        <ul class="navbar-nav mr-auto my-2 my-lg-0">  <!--vertical spacing-->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <?= Session::get('driver')['name']; ?>

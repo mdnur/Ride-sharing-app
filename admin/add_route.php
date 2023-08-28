@@ -101,7 +101,7 @@ $locations = $locations->readAll();
             </div>
 
             <div class="form-group">
-                <label for="DepartureTime">Departure Date & Time</label>
+                <label for="DepartureTime">End Date & Time</label>
                 <input type="datetime-local" class="form-control" id="DepartureTime" name="DepartureTime" aria-describedby="DepartureTimeHelp" placeholder="john_deo">
                 <!-- <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
             </div>
