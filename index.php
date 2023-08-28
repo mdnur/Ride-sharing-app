@@ -141,7 +141,6 @@ use lib\Session;
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 item">
                     <img src="images/5.png" class="img-fluid" alt="team">
-                    <img src="images/Reasat.png" class="img-fluid" alt="team">
                     <div class="des">
                         MD Reasat Ahmed
                     </div>
