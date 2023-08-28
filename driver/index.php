@@ -24,7 +24,7 @@ $admin = new AdminTable();
 
 ?>
 
-<div class="card-header">My Task Today</div>
+<div class="card-header">Today's Task</div>
 
 <div class="card-body">
 

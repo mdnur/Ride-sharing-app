@@ -119,6 +119,7 @@ use lib\Session;
                     <div class="des">
                         Jariatun Islam
                     </div>
+        
                     <span class="text-muted">Project Manager</span>
                 </div>
 
@@ -139,7 +140,7 @@ use lib\Session;
                     <span class="text-muted">Front End Developer</span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 item">
-                    <img src="images/Reasat.png" class="img-fluid" alt="team">
+                    <img src="images/T4.png" class="img-fluid" alt="team"  width = "1080" height = "1080">
                     <div class="des">
                         MD Reasat Ahmed
                     </div>

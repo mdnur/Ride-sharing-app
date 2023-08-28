@@ -47,7 +47,7 @@ $results = $results->getDriverIncomeByMonth(Session::get('driver')['id'], Date('
         // Make an AJAX request to fetch the updated income
         $.ajax({
             type: "POST", // Or "GET" depending on your server's API
-            url: "my_income_api.php", // Replace with your actual server endpoint
+            url: "my_income_api.php", 
             data: {
                 month: selectedMonth
             },

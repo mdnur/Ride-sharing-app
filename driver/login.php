@@ -1,3 +1,4 @@
+
 <?php
 
 use lib\Session;
@@ -17,9 +18,8 @@ spl_autoload_register(function ($class) {
 
 
 
-// require_once "lib/Session.php";
-
 Session::checkDriverLogin();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,6 +73,9 @@ Session::checkDriverLogin();
             <div class="row justify-content-center align-items-center min-vh-100">
                 <div class="col-md-8">
                     <div class="card">
+                    <div class="brand row justify-content-center align">
+                        <a href="index.php"><img src="../images/logo.jpg" alt="Driver login"></a>
+                    </div>
                         <div class="card-header">
                             <h4>Driver Login</h4>
                         </div>
