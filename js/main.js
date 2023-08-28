@@ -401,7 +401,7 @@ $(document).ready(function () {
 			},
 			dataType: 'json',
 			success: function (response) {
-				// console.log(response);
+				console.log(response);
 				var jsonData = [];
 				response.forEach(function (item) {
 					jsonData.push(item.phone);
